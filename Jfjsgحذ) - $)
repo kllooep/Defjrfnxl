@@ -66,6 +66,110 @@ CuteSection:AddButton({
     end
 })
 
+
+
+-- ==================== 7. قسم: القفازات ====================
+local GlovesSection = Tab:AddSection("قفازات")
+
+GlovesSection:AddButton({
+    Name = "قفازات يد اسود مخطط",
+    Callback = function()
+        Wear(9239689111)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد اسود عادي 1",
+    Callback = function()
+        Wear(10789914680)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد اسود عادي 2",
+    Callback = function()
+        Wear(11363898043)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد اسود عادي 3",
+    Callback = function()
+        Wear(10791180072)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد ابيض مزخرف",
+    Callback = function()
+        Wear(10871965173)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد زهري",
+    Callback = function()
+        Wear(10789939838)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد احمر",
+    Callback = function()
+        Wear(12379676852)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "اضافر اسود",
+    Callback = function()
+        Wear(12825022709)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 1",
+    Callback = function()
+        Wear(12483105503)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 2",
+    Callback = function()
+        Wear(12483109504)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 3",
+    Callback = function()
+        Wear(11613796964)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 4",
+    Callback = function()
+        Wear(10954568687)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 5",
+    Callback = function()
+        Wear(11679250718)
+    end
+})
+
+GlovesSection:AddButton({
+    Name = "قفازات يد قصير 6",
+    Callback = function()
+        Wear(11182924874)
+    end
+})
+
+
 -- ==================== 3. قسم: الورد ====================
 local FlowersSection = Tab:AddSection("الورد")
 
@@ -296,141 +400,13 @@ ShoesSection:AddButton({
     end
 })
 
--- ==================== 7. قسم: القفازات ====================
-local GlovesSection = Tab:AddSection("قفازات")
-
-GlovesSection:AddButton({
-    Name = "قفازات يد اسود مخطط",
-    Callback = function()
-        Wear(9239689111)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد اسود عادي 1",
-    Callback = function()
-        Wear(10789914680)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد اسود عادي 2",
-    Callback = function()
-        Wear(11363898043)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد اسود عادي 3",
-    Callback = function()
-        Wear(10791180072)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد ابيض مزخرف",
-    Callback = function()
-        Wear(10871965173)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد زهري",
-    Callback = function()
-        Wear(10789939838)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد احمر",
-    Callback = function()
-        Wear(12379676852)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "اضافر اسود",
-    Callback = function()
-        Wear(12825022709)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 1",
-    Callback = function()
-        Wear(12483105503)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 2",
-    Callback = function()
-        Wear(12483109504)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 3",
-    Callback = function()
-        Wear(11613796964)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 4",
-    Callback = function()
-        Wear(10954568687)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 5",
-    Callback = function()
-        Wear(11679250718)
-    end
-})
-
-GlovesSection:AddButton({
-    Name = "قفازات يد قصير 6",
-    Callback = function()
-        Wear(11182924874)
-    end
-})
-
--- ==================== 8. قسم: أشياء لليد ====================
-local HandItemsSection = Tab:AddSection("أشياء لليد")
-
-HandItemsSection:AddButton({
-    Name = "ورد اسود",
-    Callback = function()
-        Wear(12465465333)
-    end
-})
-
-HandItemsSection:AddButton({
-    Name = "ورد ابيض",
-    Callback = function()
-        Wear(12465472210)
-    end
-})
-
-HandItemsSection:AddButton({
-    Name = "ورد احمر",
-    Callback = function()
-        Wear(12465376206)
-    end
-})
-section = Tab:AddSection({
-    Name = "مخدات رجل"
-})
-
-Tab:AddButton({Name = "تنحط بل رجل حمراء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388001192) end})
-Tab:AddButton({Name = "تنحط بل رجل بيضاء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388009243) end})
-Tab:AddButton({Name = "بزازت مال رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(13463290106) end})
-Tab:AddButton({Name = "مخده سوده تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(101836206044298) end})
-Tab:AddButton({Name = "بيضه تحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(11111279400) end})
-Tab:AddButton({Name = "مخده تنحط بل رجل بيضه و سوده", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14387999337) end})
-Tab:AddButton({Name = "مخده بيضه تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(90926188446523) end})
-Tab:AddButton({Name = "تنحط بل رجل مخده تشك شگ", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388006902) end})
-Tab:AddButton({Name = "مخده سوده تنحط بل رجل", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388004031) end})
+ShoesSection:AddButton({Name = "تنحط بل رجل حمراء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388001192) end})
+ShoesSection:AddButton({Name = "تنحط بل رجل بيضاء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388009243) end})
+ShoesSection:AddButton({Name = "بزازت مال رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(13463290106) end})
+ShoesSection:AddButton({Name = "مخده سوده تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(101836206044298) end})
+ShoesSection:AddButton({Name = "بيضه تحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(11111279400) end})
+ShoesSection:AddButton({Name = "مخده تنحط بل رجل بيضه و سوده", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14387999337) end})
+ShoesSection:AddButton({Name = "مخده بيضه تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(90926188446523) end})
+ShoesSection:AddButton({Name = "تنحط بل رجل مخده تشك شگ", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388006902) end})
+ShoesSection:AddButton({Name = "مخده سوده تنحط بل رجل", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388004031) end})
 
