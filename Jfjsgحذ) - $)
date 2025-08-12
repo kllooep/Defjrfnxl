@@ -668,3 +668,18 @@ AddButton(Main, {
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes", 9e9):WaitForChild("Wear", 9e9):InvokeServer(unpack(args))
 end
 })
+
+section = Tab:AddSection({
+    Name = "مخدات رجل"
+})
+
+Tab:AddButton({Name = "تنحط بل رجل حمراء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388001192) end})
+Tab:AddButton({Name = "تنحط بل رجل بيضاء", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388009243) end})
+Tab:AddButton({Name = "بزازت مال رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(13463290106) end})
+Tab:AddButton({Name = "مخده سوده تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(101836206044298) end})
+Tab:AddButton({Name = "بيضه تحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(11111279400) end})
+Tab:AddButton({Name = "مخده تنحط بل رجل بيضه و سوده", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14387999337) end})
+Tab:AddButton({Name = "مخده بيضه تنحط بل رجلين", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(90926188446523) end})
+Tab:AddButton({Name = "تنحط بل رجل مخده تشك شگ", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388006902) end})
+Tab:AddButton({Name = "مخده سوده تنحط بل رجل", Callback = function() game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(14388004031) end})
+
