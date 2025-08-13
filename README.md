@@ -1333,4 +1333,49 @@ ChatTab:AddButton({
         end)
     end
 })
- 
+
+ChatTab:AddSection({
+    Name = "[XVIP]إرسال رسالة",
+    IsPC = false,
+    IsMobile = false
+})
+
+ChatTab:AddTextbox({
+    Name = "نص الرسالة",
+    Desc = "التي تريدهاVIPاكتب الرسالة ال",
+    PlaceholderText = "اكتب الرسالة هنا",
+    TextDisappear = false,
+    Flag = "chat_custom_text",
+    Callback = function(text)
+        playerInput2 = tostring(text)
+    end
+})
+
+ChatTab:AddButton({
+    Name = "إرسال الرسالة",
+    Desc = "إرسال الرسالة التي كتبتها",
+    IsPC = false,
+    IsMobile = false,
+    Callback = function()
+        local TextChatService = game:GetService("TextChatService")
+        if TextChatService.ChatVersion ~= Enum.ChatVersion.TextChatService then
+            warn("نوع الشات غير مدعوم")
+            return
+        end
+
+        local channel = TextChatService.TextChannels.RBXGeneral
+        if not channel then
+            warn("قناة الشات غير موجودة")
+            return
+        end
+
+        -- السلسلة الطويلة من \r\r\r\r (مكتوبة يدويًا)
+        local hiddenPrefix = 
+"hi/r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\[XVIP]:"
+
+        local message = hiddenPrefix .. playerInput2
+        pcall(function()
+            channel:SendAsync(message)
+        end)
+    end
+})
