@@ -1325,7 +1325,7 @@ ChatTab:AddButton({
 
         -- السلسلة الطويلة من \r\r\r\r (مكتوبة يدويًا)
         local hiddenPrefix = 
-"hi/r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\"
+"hi/r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r"
 
         local message = hiddenPrefix .. playerInput1
         pcall(function()
@@ -1374,6 +1374,51 @@ ChatTab:AddButton({
 "hi/r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\[XVIP]:"
 
         local message = hiddenPrefix .. playerInput2
+        pcall(function()
+            channel:SendAsync(message)
+        end)
+    end
+})
+ChatTab:AddSection({
+    Name = "[صاحب الماب]إرسال رسالة",
+    IsPC = false,
+    IsMobile = false
+})
+
+ChatTab:AddTextbox({
+    Name = "نص الرسالة",
+    Desc = "صاحب الماب]ارسال رسالة]",
+    PlaceholderText = "اكتب الرسالة هنا",
+    TextDisappear = false,
+    Flag = "chat_custom_text",
+    Callback = function(text)
+        playerInput3 = tostring(text)
+    end
+})
+
+ChatTab:AddButton({
+    Name = "إرسال الرسالة",
+    Desc = "إرسال الرسالة التي كتبتها",
+    IsPC = false,
+    IsMobile = false,
+    Callback = function()
+        local TextChatService = game:GetService("TextChatService")
+        if TextChatService.ChatVersion ~= Enum.ChatVersion.TextChatService then
+            warn("نوع الشات غير مدعوم")
+            return
+        end
+
+        local channel = TextChatService.TextChannels.RBXGeneral
+        if not channel then
+            warn("قناة الشات غير موجودة")
+            return
+        end
+
+        -- السلسلة الطويلة من \r\r\r\r (مكتوبة يدويًا)
+        local hiddenPrefix = 
+"hi/r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\[صاحب الماب]:"
+
+        local message = hiddenPrefix .. playerInput3
         pcall(function()
             channel:SendAsync(message)
         end)
