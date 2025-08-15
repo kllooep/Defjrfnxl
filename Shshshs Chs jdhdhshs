@@ -6265,6 +6265,7 @@ for _, btn in ipairs(teleportButtons) do
     })
 end
 
+________________AAKKLL ITEM________________________
 
 local ToolsTab = Window:MakeTab({"Items", "backpack"})
 
@@ -7844,6 +7845,8 @@ ToolsTab:AddButton({
     end
 })
 
+_______كرستالة____________
+
 -- Button for Crystal Cross
 ToolsTab:AddButton({
     Name = "Crystal Cross",
@@ -9174,6 +9177,8 @@ ToolsTab:AddButton({
                 end
     end
 })
+
+____________نهايات_______-----__
 
 local UniversalTab = Window:MakeTab({"Scripts Universais", "plane"})
 
