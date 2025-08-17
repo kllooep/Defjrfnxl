@@ -1,0 +1,197 @@
+
+
+
+--[=[
+
+                ___====-_--_  
+           _--^^^#####//      \\#####^^^--_  
+        _-^##########// (    ) \\##########^-_  
+       -############//  |\^^/|  \\############-  
+     _/############//   (@::@)   \\############\_  
+    /#############((     \\//     ))#############\  
+   -###############\\    (oo)    //###############-  
+  -#################\\  / UUU \  //#################-  
+ -###################\\/  (vVv)  \/###################-  
+_#/|##########/\######(   /   \   )######/\##########|\#_  
+|/ |#/\#/\#/\/  \#/\##\  (     )  /##/\#/  \/\#/\#/\#| \|  
+`  |/  V  V  `   V  \#\|  (   )  |/#/  V   '  V  V  \|  '  
+   `   `  `       `   / |  (   )  | \   '      '  '   '  
+                     (  |  (   )  |  )  
+                    __\ |  (___)  | /__  
+                   (vvv(VVVvVVVVvVVV)vvv)  
+
+        ██████╗  ███╗   ███╗
+        ██╔══██╗ ████╗ ████║
+        ██████╔╝ ██╔████╔██║
+        ██╔═══╝  ██║╚██╔╝██║
+        ██║      ██║ ╚═╝ ██║
+        ╚═╝      ╚═╝     ╚═╝
+
+                  G - M  
+--]=]
+
+
+
+
+--------by ghali
+game:GetService("ReplicatedStorage").RE["1RPNam1eTex1t"]:FireServer("RolePlayName", "welcome to NetroZ Hub ")
+
+local args = {
+    [1] = "PickingRPNameColor",
+    [2] = Color3.fromRGB(255, 0, 0), -- Amarelo
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eColo1r"):FireServer(unpack(args))
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local args = {
+    [1] = "RolePlayBio",
+    [2] = LocalPlayer.Name  -- غالي عمك
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eTex1t"):FireServer(unpack(args))
+
+local args = {
+    [1] = "PickingRPBioColor",
+    [2] = Color3.fromRGB(p, 0, 0), -- Amarelo
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1RPNam1eColo1r"):FireServer(unpack(args))
+
+
+
+
+
+
+
+local splib = loadstring(game:HttpGet("https://raw.githubusercontent.com/as6cd0/SP_Hub/refs/heads/main/splibv2"))()
+
+local Window = splib:MakeWindow({
+ Name = "NetroZ Hub V1.1",
+ SubTitle = "by {Ghali,Rami}",
+ HidePremium = false,
+ SaveConfig = true,
+ Setting = true,
+ RainbowMainFrame = true,
+ RainbowTitle = true,
+ RainbowSubTitle = true,
+ ToggleIcon = "rbxassetid://70819482500927",
+ ConfigFolder = "SP_Library",
+ CloseCallback = true
+})
+
+local Tab = Window:MakeTab({
+ IsMobile = false,
+ IsPC = false,
+	Name = "الحقوق",
+	Icon = "info"
+})
+
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- جلب صورة رأس اللاعب
+local thumbType = Enum.ThumbnailType.HeadShot
+local thumbSize = Enum.ThumbnailSize.Size100x100
+local success, imageUrl = pcall(function()
+    return Players:GetUserThumbnailAsync(LocalPlayer.UserId, thumbType, thumbSize)
+end)
+
+if success then
+    Tab:AddImageLabel({
+        IsMobile = false,
+        IsPC = false,
+        Name = LocalPlayer.Name, -- اسم اللاعب
+        Desc = "",
+        Image = imageUrl, -- رابط الصورة الديناميكي
+        Rainbow = true
+    })
+else
+    warn("فشل في جلب صورة اللاعب")
+end
+
+local Players = game:GetService("Players")
+
+-- إنشاء التاب
+local Players = game:GetService("Players")
+
+-- إنشاء التاب
+local Players = game:GetService("Players")
+
+local Players = game:GetService("Players")
+
+
+
+-- Tab 1
+local Tab = Window:MakeTab({
+    IsMobile = false,
+    IsPC = false,
+    Name = "Tab 1",
+    Icon = "rbxassetid://4483345998"
+})
+
+-- جدول يحتوي على أسماء الرؤوس مع الـ Asset IDs الخاصة بها
+-- متغير نخزن فيه الرأس المختار
+local selectedHead = nil
+
+-- Dropdown للاختيار
+Tab:AddDropdown({
+    IsMobile = false,
+    IsPC = false,
+    Name = "اختيار رأس",
+    Desc = "اختر الرأس من القائمة",
+    Default = "راس مخفي",
+    Options = {
+        "راس مخفي",
+        "راس روبوت 1",
+        "راس روبوت 2",
+        "راس venom",
+        "راس مقطوع من النصف",
+        "راس ضفدع",
+        "راس بسيط"
+    },
+    Flag = "HeadDropdown",
+    Callback = function(value)
+        print("تم اختيار:", value)
+        selectedHead = value -- نخزن الاسم المختار هنا
+    end
+})
+
+-- زر للتطبيق
+Tab:AddButton({
+    IsMobile = false,
+    IsPC = false,
+    Name = "تطبيق الرأس",
+    Desc = "يضيف الرأس للشخصية",
+    Callback = function()
+        if not selectedHead then
+            warn("لم يتم اختيار رأس بعد!")
+            return
+        end
+
+        -- جدول يربط الاسم مع الـ Asset ID
+        local heads = {
+            ["راس مخفي"] = 134082579,
+            ["راس روبوت 1"] = 3210773801,
+            ["راس روبوت 2"] = 74695026456679,
+            ["راس venom"] = 111657492301699,
+            ["راس مقطوع من النصف"] = 16973885928,
+            ["راس ضفدع"] = 17898084158,
+            ["راس بسيط"] = 137097755853616
+        }
+
+        local selectedId = heads[selectedHead]
+        if selectedId then
+            local args = {
+                [1] = selectedId
+            }
+            game:GetService("ReplicatedStorage").Remotes.Wear:InvokeServer(unpack(args))
+            print("تم تطبيق الرأس:", selectedHead)
+        else
+            warn("الرأس المختار غير موجود في الجدول!")
+        end
+    end
+})
