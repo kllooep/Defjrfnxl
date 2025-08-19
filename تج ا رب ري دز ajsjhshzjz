@@ -82,17 +82,6 @@ MusicTab:AddSection({
     Name = "ادخل كود الأغنية"
 })
 
-MusicTab:AddTextbox({
-    Name = "كود الأغنية",
-    PlaceholderText = "ادخل ID الصوت",
-    TextDisappear = false,
-    Callback = function(Value)
-        local id = tonumber(Value)
-        if id then
-            PlayMusic(id)
-        end
-    end
-})
 
 -- ==================== قسم: الأغاني العراقية ====================
 MusicTab:AddSection({
@@ -493,48 +482,44 @@ TabMusic:AddSection({
 
 -- قائمة الصوتيات
 local audios = {
-    {Name = "ياميتي كوداساي", ID = 108494476595033},
     {Name = "صراخ", ID = 5710016194},
     {Name = "مخيف", ID = 85435253347146},
-    {Name = "صوت عالي", ID = 6855150757},
+    {Name = "صوت عالي ضخم", ID = 6855150757},
     {Name = "تشويش", ID = 120034877160791},
     {Name = "صراخ 2", ID = 110637995610528},
-    {Name = "ماينكرافت", ID = 116214940486087},
+    {Name = "صوت ساحرة ماينكرافت", ID = 116214940486087},
     {Name = "لعبان نفس", ID = 137177653817621},
-    {Name = "Deitei Um Ave Maria Doido", ID = 128669424001766},
-    {Name = "Mandrake Detected", ID = 9068077052},
-    {Name = "ااااااااع", ID = 80156405968805},
+    {Name = "صوت مخابيل", ID = 128669424001766},
+    {Name = "انذار", ID = 9068077052},
+    {Name = "صوت واحد ضرب أصبع رجله الصغير", ID = 80156405968805},
     {Name = "اااااااه", ID = 9084006093},
     {Name = "امونق اس", ID = 6651571134},
-    {Name = "سوس", ID = 6701126635},
-    {Name = "Gritao AAAAAAAAA", ID = 5853668794},
-    {Name = "ااااااه", ID = 7056720271},
+    {Name = "صدمه", ID = 6701126635},
+    {Name = "(واحد يتنفس بسرعة (مخبل", ID = 5853668794},
+    {Name = "تلوث سمعي", ID = 7056720271},
     {Name = "سوس٢", ID = 7153419575},
-    {Name = "Sonic.exe", ID = 2496367477},
-    {Name = "Tubers93 1", ID = 270145703},
-    {Name = "Tubers93 2", ID = 18131809532},
-    {Name = "John's Laugh", ID = 130759239},
-    {Name = "Nao sei KKKK", ID = 6549021381},
-    {Name = "Grito", ID = 80156405968805},
-    {Name = "audio estranho", ID = 7705506391},
-    {Name = "اااع", ID = 7772283448},
+    {Name = "Sonic.exeفايروس", ID = 2496367477},
+    {Name = "صراخ مزعج", ID = 270145703},
+    {Name = "ضحكة هكر", ID = 18131809532},
+    {Name = "ضحكة هكر،2", ID = 130759239},
+    {Name = "صوت مزعج", ID = 6549021381},
+    {Name = "مادري شنو بكيفك انت سميه", ID = 7705506391},
+    {Name = "اااااع", ID = 7772283448},
     {Name = "Gay, گي", ID = 18786647417},
-    {Name = "Bat Hit", ID = 7129073354},
-    {Name = "Nuclear Siren", ID = 675587093},
-    {Name = "Sem ideia de nome KK", ID = 7520729342},
-    {Name = "Grito 2", ID = 91412024101709},
-    {Name = "Estora tímpano", ID = 268116333},
-    {Name = "[ Content Deleted ]", ID = 106835463235574},
-    {Name = "Toma Jack", ID = 132603645477541},
-    {Name = "Pede ifood pede", ID = 133843750864059},
-    {Name = "I Ghost The down", ID = 84663543883498},
-    {Name = "Compre OnLine Na shoope", ID = 8747441609},
-    {Name = "Uh Que Nojo", ID = 103440368630269},
-    {Name = "Sai dai Lava Prato", ID = 101232400175829},
-    {Name = "Seloko num compensa", ID = 78442476709262},
-    {Name = "(NEW) Chimpanzini Bananini Funk", ID = 137148228908678},
-    {Name = "(NEW) Candyland - Tobu", ID = 118939739460633},
-    {Name = "(NEW) نغمة ترند", ID = 100656590080703},
+    {Name = "تينق", ID = 7129073354},
+    {Name = "فايروس سيرين", ID = 675587093},
+    {Name = "واحد ضرب اصبع رجله في الشتاء", ID = 7520729342},
+    {Name = "تعذيب", ID = 91412024101709},
+    {Name = "دارك ويب", ID = 268116333},
+    {Name = "توما جاك", ID = 132603645477541},
+    {Name = "بيدي فودي", ID = 133843750864059},
+    {Name = "آي غوست", ID = 84663543883498},
+    {Name = "گومبي", ID = 8747441609},
+    {Name = "ا كي نوچو", ID = 103440368630269},
+    {Name = "ساي داي لافا برادو", ID = 101232400175829},
+    {Name = "سيلوووك", ID = 78442476709262},
+    {Name = "(NEW) نغمة موبايل ترند", ID = 118939739460633},
+    {Name = "(NEW) (وت ذا هيل (ترند", ID = 100656590080703},
     {Name = "(NEW) لا أفهم شيئًا", ID = 7962533987}
 }
 
@@ -548,24 +533,7 @@ for _, audio in ipairs(audios) do
 end
 
 -- مربع إدخال ID
-TabMusic:AddTextbox({
-    Name = "ادخال صوت الموسيقى",
-    Desc = "اكتب ID الصوت",
-    PlaceholderText = "ادخل الـ ID",
-    TextDisappear = true,
-    Callback = function(value)
-        local id = tonumber(value)
-        if id then
-            selectedAudioID = id
-        else
-            TabMusic:AddNotification({
-                Name = "خطأ",
-                Content = "الرجاء إدخال رقم صحيح!",
-                Time = 5
-            })
-        end
-    end
-})
+
 
 -- القائمة المنسدلة
 TabMusic:AddDropdown({
@@ -583,10 +551,54 @@ TabMusic:AddDropdown({
     end
 })
 
--- ==================== قسم: تكرار الصوت ====================
+-- ==================== قسم: تشغيل مرة واحدة ====================
 TabMusic:AddSection({
-    Name = "تكرار أو سبام الصوت"
+    Name = "تشغيل الصوت (مرة واحدة)"
 })
+
+local function playAudio()
+    if not selectedAudioID then
+        TabMusic:AddNotification({
+            Name = "خطأ",
+            Content = "لم يتم اختيار صوت!",
+            Time = 5
+        })
+        return
+    end
+
+    local args = {
+        [1] = workspace,
+        [2] = selectedAudioID,
+        [3] = 1
+    }
+    local GunSound = game:GetService("ReplicatedStorage"):FindFirstChild("1Gu1nSound1s")
+    if GunSound then
+        pcall(function()
+            GunSound:FireServer(unpack(args))
+        end)
+    end
+
+    task.spawn(function()
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://" .. selectedAudioID
+        sound.Parent = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or workspace
+        sound:Play()
+        task.delay(5, function()
+            if sound and sound.Parent then
+                sound:Destroy()
+            end
+        end)
+    end)
+end
+
+TabMusic:AddButton({
+    Name = "تشغيل",
+    Desc = "تشغيل الصوت المحدد",
+    Callback = function()
+        playAudio()
+    end
+})
+-- ==================== قسم: تكرار الصوت ====================
 
 -- متغير التحكم في التكرار
 local audioLoop = false
@@ -660,55 +672,8 @@ TabMusic:AddToggle({
     end
 })
 
-TabMusic:AddParagraph("Info", "تكرار الصوت (كل اللاعبين يسمعوه)")
 
--- ==================== قسم: تشغيل مرة واحدة ====================
-TabMusic:AddSection({
-    Name = "تشغيل الصوت (مرة واحدة)"
-})
 
-local function playAudio()
-    if not selectedAudioID then
-        TabMusic:AddNotification({
-            Name = "خطأ",
-            Content = "لم يتم اختيار صوت!",
-            Time = 5
-        })
-        return
-    end
-
-    local args = {
-        [1] = workspace,
-        [2] = selectedAudioID,
-        [3] = 1
-    }
-    local GunSound = game:GetService("ReplicatedStorage"):FindFirstChild("1Gu1nSound1s")
-    if GunSound then
-        pcall(function()
-            GunSound:FireServer(unpack(args))
-        end)
-    end
-
-    task.spawn(function()
-        local sound = Instance.new("Sound")
-        sound.SoundId = "rbxassetid://" .. selectedAudioID
-        sound.Parent = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or workspace
-        sound:Play()
-        task.delay(5, function()
-            if sound and sound.Parent then
-                sound:Destroy()
-            end
-        end)
-    end)
-end
-
-TabMusic:AddButton({
-    Name = "تشغيل",
-    Desc = "تشغيل الصوت المحدد",
-    Callback = function()
-        playAudio()
-    end
-})
 
 -- ==================== قسم: صوت قوي للجميع ====================
 TabMusic:AddSection({
@@ -759,5 +724,3 @@ TabMusic:AddToggle({
         end
     end
 })
-
-TabMusic:AddParagraph("Info", "تشغيل صوت قوي للجميع")
