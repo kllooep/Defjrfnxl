@@ -10,3 +10,312 @@ Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://71014873973869", BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(35, 1) },
 })
+local MusicTab = Window:MakeTab({
+    Name = "(gamepass)أغاني",
+    Icon = "music"
+})
+
+-- دالة عامة لتشغيل الموسيقى
+local function PlayMusic(id)
+    local args1 = { [1] = "SkateBoard" }
+    local args2 = { [1] = "PickingScooterMusicText", [2] = id }
+    local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("RE"):FindFirstChild("1NoMoto1rVehicle1s")
+    if Remote then
+        pcall(function()
+            Remote:FireServer(unpack(args1))
+            Remote:FireServer(unpack(args2))
+        end)
+    end
+end
+
+-- ==================== قسم: إدخال الكود يدويًا ====================
+MusicTab:AddSection({
+    Name = "ادخل كود الأغنية"
+})
+
+MusicTab:AddButton({
+    Name = "فورتنيات الببجي",
+    Callback = function()
+        PlayMusic(8671258578)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "برازيلي",
+    Callback = function()
+        PlayMusic(104541292443133)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "هنديه",
+    Callback = function()
+        PlayMusic(98757377820359)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "شعر شيعي",
+    Callback = function()
+        PlayMusic(98224127892587)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "قران 1",
+    Callback = function()
+        PlayMusic(86911769585232)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "في عالم",
+    Callback = function()
+        PlayMusic(125151253990122)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "قران2",
+    Callback = function()
+        PlayMusic(133272041755020)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "قران3",
+    Callback = function()
+        PlayMusic(88269497623993)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "حزين 2",
+    Callback = function()
+        PlayMusic(135308045)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "الحمدلله",
+    Callback = function()
+        PlayMusic(7609175072)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اذان",
+    Callback = function()
+        PlayMusic(1836685881)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "جاء الليل",
+    Callback = function()
+        PlayMusic(132182002773837)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "صلو علنبي",
+    Callback = function()
+        PlayMusic(9108676586)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "السلام عليكم",
+    Callback = function()
+        PlayMusic(7038667176)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "كريسماس",
+    Callback = function()
+        PlayMusic(1841342574)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "صدام",
+    Callback = function()
+        PlayMusic(8273849195)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "ويه ويه",
+    Callback = function()
+        PlayMusic(1164198099)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "حبيبي شنو في",
+    Callback = function()
+        PlayMusic(7657178494)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اغنيه مصريه حب",
+    Callback = function()
+        PlayMusic(93620598835551)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "موسيقى حماس",
+    Callback = function()
+        PlayMusic(128018172854846)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "دبجه",
+    Callback = function()
+        PlayMusic(76698985299412)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "ازعاج",
+    Callback = function()
+        PlayMusic(4776398821)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "ضراط",
+    Callback = function()
+        PlayMusic(4809574295)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "عود قوي",
+    Callback = function()
+        PlayMusic(114157294180725)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "عود حزين",
+    Callback = function()
+        PlayMusic(104085669063530)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "يمني وين الوفاء",
+    Callback = function()
+        PlayMusic(116150415085902)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اغنيه سوريه",
+    Callback = function()
+        PlayMusic(98640789490482)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اهات 😂",
+    Callback = function()
+        PlayMusic(8107899910)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "رعب",
+    Callback = function()
+        PlayMusic(1848748988)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "سبونج بوب",
+    Callback = function()
+        PlayMusic(2396797933)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اغنيه عرببه",
+    Callback = function()
+        PlayMusic(1836685799)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "اوووو",
+    Callback = function()
+        PlayMusic(93123670572331)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "ناني",
+    Callback = function()
+        PlayMusic(8842446965)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "صوت مطي",
+    Callback = function()
+        PlayMusic(6900670817)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "حقود",
+    Callback = function()
+        PlayMusic(4533138868)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "مايكل جاكسن",
+    Callback = function()
+        PlayMusic(7061299253)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "هديها شوي",
+    Callback = function()
+        PlayMusic(7644757406)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "ريمكس",
+    Callback = function()
+        PlayMusic(16190783774)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "رمي",
+    Callback = function()
+        PlayMusic(2838571776)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "سب",
+    Callback = function()
+        PlayMusic(7942547789)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "تفحيط 2",
+    Callback = function()
+        PlayMusic(7173073353)
+    end
+})
