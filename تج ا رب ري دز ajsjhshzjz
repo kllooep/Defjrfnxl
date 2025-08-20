@@ -499,10 +499,6 @@ MusicTab:AddButton({
     end
 })
 
-MusicTab:AddSection({
-    Name = "السب"
-})
-
 MusicTab:AddButton({
     Name = "صوت اشعار سامسونج",
     Callback = function()
@@ -517,31 +513,61 @@ MusicTab:AddButton({
     end
 })
 
-MusicTab:AddButton({
+local MusicTabFU = Window:MakeTab({
+    Title = "سب+🔞",
+    Icon = "🔞💀"
+})
+
+MusicTabFU:AddSection({
+    Name = "السب"
+})
+
+MusicTabFU:AddButton({
     Name = "سب1",
     Callback = function()
         PlayMusic(8701632845)
     end
 })
 
-MusicTab:AddButton({
+MusicTabFU:AddButton({
     Name = "سب2",
     Callback = function()
         PlayMusic(5849978429)
     end
 })
 
-MusicTab:AddButton({
+MusicTabFU:AddButton({
     Name = "سب3",
     Callback = function()
         PlayMusic(8136342274)
     end
 })
 
-MusicTab:AddButton({
+MusicTabFU:AddButton({
     Name = "سب4",
     Callback = function()
         PlayMusic(6536444735)
+    end
+})
+
+MusicTabFU:AddButton({
+    Name = "سب5",
+    Callback = function()
+        PlayMusic(7183326833)
+    end
+})
+
+MusicTabFU:AddButton({
+    Name = "سب6",
+    Callback = function()
+        PlayMusic(6713993281)
+    end
+})
+
+MusicTabFU:AddButton({
+    Name = "7سب",
+    Callback = function()
+        PlayMusic(7942547789)
     end
 })
 
