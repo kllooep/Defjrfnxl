@@ -327,11 +327,15 @@ local MusicTab = Window:MakeTab({
     Icon = "music"
 })
 
+-- ==================== قسم: إدخال الكود يدويًا ====================
+MusicTab:AddSection("ادخل كود الأغنية")
+
 -- دالة عامة لتشغيل الموسيقى
 local function PlayMusic(id)
     local args1 = { [1] = "SkateBoard" }
     local args2 = { [1] = "PickingScooterMusicText", [2] = id }
     local Remote = game:GetService("ReplicatedStorage"):FindFirstChild("RE"):FindFirstChild("1NoMoto1rVehicle1s")
+    
     if Remote then
         pcall(function()
             Remote:FireServer(unpack(args1))
@@ -340,11 +344,30 @@ local function PlayMusic(id)
     end
 end
 
--- ==================== قسم: إدخال الكود يدويًا ====================
-MusicTab:AddSection({
-    Name = "ادخل كود الأغنية"
+-- مربع إدخال ID
+MusicTab:AddTextBox({
+    Name = "كود الأغنية",
+    PlaceholderText = "ادخل ID الصوت",
+    Callback = function(Value)
+        local id = tonumber(Value)
+        if id then
+            PlayMusic(id)
+            -- (اختياري) إشعار نجاح
+            MusicTab:AddNotification({
+                Name = "تشغيل",
+                Content = "تم تشغيل الموسيقى بـ ID: " .. id,
+                Time = 3
+            })
+        else
+            -- (اختياري) إشعار خطأ
+            MusicTab:AddNotification({
+                Name = "خطأ",
+                Content = "الرجاء إدخال رقم صحيح!",
+                Time = 5
+            })
+        end
+    end
 })
-
 
 -- ==================== قسم: الأغاني العراقية ====================
 MusicTab:AddSection({
