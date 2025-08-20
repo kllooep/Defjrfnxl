@@ -438,6 +438,24 @@ MusicTab:AddButton({
     end
 })
 
+MusicTab2:AddButton({
+    Name = "يمني وين الوفاء",
+    Callback = function()
+        PlayMusic(116150415085902)
+    end
+})
+
+MusicTab2:AddButton({
+    Name = "اغنيه سوريه",
+    Callback = function()
+        PlayMusic(98640789490482)
+    end
+})
+
+MusicTab:AddSection({
+    Name = "دبكات"
+})
+
 MusicTab:AddButton({
     Name = "دبكة 1",
     Callback = function()
@@ -452,17 +470,10 @@ MusicTab:AddButton({
     end
 })
 
-MusicTab:AddButton({
-    Name = "صوت اشعار سامسونج",
+MusicTab2:AddButton({
+    Name = "دبكة مصري",
     Callback = function()
-        PlayMusic(7288899492)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "وش فيك",
-    Callback = function()
-        PlayMusic(7341215833)
+        PlayMusic(76698985299412)
     end
 })
 
@@ -861,13 +872,6 @@ MusicTab2:AddButton({
 
 
 
-MusicTab2:AddButton({
-    Name = "دبجه مصري",
-    Callback = function()
-        PlayMusic(76698985299412)
-    end
-})
-
 
 MusicTab2:AddButton({
     Name = "ضراط",
@@ -890,26 +894,7 @@ MusicTab2:AddButton({
     end
 })
 
-MusicTab2:AddButton({
-    Name = "يمني وين الوفاء",
-    Callback = function()
-        PlayMusic(116150415085902)
-    end
-})
 
-MusicTab2:AddButton({
-    Name = "اغنيه سوريه",
-    Callback = function()
-        PlayMusic(98640789490482)
-    end
-})
-
-MusicTab2:AddButton({
-    Name = "اهات 😂",
-    Callback = function()
-        PlayMusic(8107899910)
-    end
-})
 
 MusicTab2:AddButton({
     Name = "رعب",
@@ -967,22 +952,30 @@ MusicTab2:AddButton({
     end
 })
 
+MusicTab:AddButton({
+    Name = "صوت اشعار سامسونج",
+    Callback = function()
+        PlayMusic(7288899492)
+    end
+})
+
+MusicTab:AddButton({
+    Name = "وش فيك",
+    Callback = function()
+        PlayMusic(7341215833)
+    end
+}) 
+
 MusicTab2:AddButton({
-    Name = "رمي",
+    Name = "رمي رصاص",
     Callback = function()
         PlayMusic(2838571776)
     end
 })
 
-MusicTab2:AddButton({
-    Name = "سب",
-    Callback = function()
-        PlayMusic(7942547789)
-    end
-})
 
 MusicTab2:AddButton({
-    Name = "تفحيط 2",
+    Name = "🏎️تفحيط سوبرا",
     Callback = function()
         PlayMusic(7173073353)
     end
