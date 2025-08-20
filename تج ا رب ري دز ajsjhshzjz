@@ -510,35 +510,35 @@ MusicTab:AddButton({
 })
 
 MusicTab:AddButton({
-    Name = "قرآن 1",
+    Name = "سورة البقرة",
     Callback = function()
         PlayMusic(1836685929)
     end
 })
 
 MusicTab:AddButton({
-    Name = "قرآن 2",
+    Name = "وقضى ربك الا تعبدو",
     Callback = function()
         PlayMusic(113184639716766)
     end
 })
 
 MusicTab:AddButton({
-    Name = "قرآن 3",
+    Name = "آية الكرسي",
     Callback = function()
         PlayMusic(113267251759253)
     end
 })
 
 MusicTab:AddButton({
-    Name = "قرآن 4",
+    Name = "سورة الفاتحة",
     Callback = function()
         PlayMusic(104251523505775)
     end
 })
 
 MusicTab:AddButton({
-    Name = "قرآن 5",
+    Name = "وكان الله غفورا رحيما",
     Callback = function()
         PlayMusic(94610377976036)
     end
@@ -753,22 +753,10 @@ local MusicTab2 = Window:MakeTab({
     Icon = "rbxassetid://119290839281477"
 })
 
--- دالة تشغيل الموسيقى (مثال)
-local function PlayMusic1(soundId)
-    local args = {
-        [1] = game:GetService("Workspace"),
-        [2] = soundId,
-        [3] = 1
-    }
-    game:GetService("ReplicatedStorage"):WaitForChild("RE", 5):WaitForChild("1Gu1nSound1s", 5):FireServer(unpack(args))
-end
-
--- ==================== أزرار الأغاني (مكتوبة بشكل منفصل) ====================
-
 MusicTab2:AddButton({
     Name = "فورتنيات الببجي",
     Callback = function()
-        PlayMusic1(8671258578)
+        PlayMusic(8671258578)
     end
 })
 
@@ -776,112 +764,112 @@ MusicTab2:AddButton({
 MusicTab2:AddButton({
     Name = "هنديه",
     Callback = function()
-        PlayMusic1(98757377820359)
+        PlayMusic(98757377820359)
     end
 })
 
 MusicTab2:AddButton({
     Name = "شعر شيعي",
     Callback = function()
-        PlayMusic1(98224127892587)
+        PlayMusic(98224127892587)
     end
 })
 
 MusicTab2:AddButton({
     Name = "سورة الفلق",
     Callback = function()
-        PlayMusic1(86911769585232)
+        PlayMusic(86911769585232)
     end
 })
 
 MusicTab2:AddButton({
     Name = "في عالم",
     Callback = function()
-        PlayMusic1(125151253990122)
+        PlayMusic(125151253990122)
     end
 })
 
 MusicTab2:AddButton({
     Name = "لِألاف قريش",
     Callback = function()
-        PlayMusic1(133272041755020)
+        PlayMusic(133272041755020)
     end
 })
 
 MusicTab2:AddButton({
     Name = "قل هو الله احد",
     Callback = function()
-        PlayMusic1(88269497623993)
+        PlayMusic(88269497623993)
     end
 })
 
 MusicTab2:AddButton({
     Name = "حزين 2",
     Callback = function()
-        PlayMusic1(135308045)
+        PlayMusic(135308045)
     end
 })
 
 MusicTab2:AddButton({
     Name = "الحمدلله",
     Callback = function()
-        PlayMusic1(7609175072)
+        PlayMusic(7609175072)
     end
 })
 
 MusicTab2:AddButton({
     Name = "اذان",
     Callback = function()
-        PlayMusic1(1836685881)
+        PlayMusic(1836685881)
     end
 })
 
 MusicTab2:AddButton({
     Name = "جاء الليل",
     Callback = function()
-        PlayMusic1(132182002773837)
+        PlayMusic(132182002773837)
     end
 })
 
 MusicTab2:AddButton({
     Name = "صلو علنبي",
     Callback = function()
-        PlayMusic1(9108676586)
+        PlayMusic(9108676586)
     end
 })
 
 MusicTab2:AddButton({
     Name = "السلام عليكم",
     Callback = function()
-        PlayMusic1(7038667176)
+        PlayMusic(7038667176)
     end
 })
 
 MusicTab2:AddButton({
     Name = "كريسماس",
     Callback = function()
-        PlayMusic1(1841342574)
+        PlayMusic(1841342574)
     end
 })
 
 MusicTab2:AddButton({
     Name = "صدام",
     Callback = function()
-        PlayMusic1(8273849195)
+        PlayMusic(8273849195)
     end
 })
 
 MusicTab2:AddButton({
     Name = "ويه ويه",
     Callback = function()
-        PlayMusic1(1164198099)
+        PlayMusic(1164198099)
     end
 })
 
 MusicTab2:AddButton({
     Name = "حبيبي شنو في",
     Callback = function()
-        PlayMusic1(7657178494)
+        PlayMusic(7657178494)
     end
 })
 
@@ -890,7 +878,7 @@ MusicTab2:AddButton({
 MusicTab2:AddButton({
     Name = "دبجه مصري",
     Callback = function()
-        PlayMusic1(76698985299412)
+        PlayMusic(76698985299412)
     end
 })
 
@@ -898,118 +886,118 @@ MusicTab2:AddButton({
 MusicTab2:AddButton({
     Name = "ضراط",
     Callback = function()
-        PlayMusic1(4809574295)
+        PlayMusic(4809574295)
     end
 })
 
 MusicTab2:AddButton({
     Name = "عود قوي",
     Callback = function()
-        PlayMusic1(114157294180725)
+        PlayMusic(114157294180725)
     end
 })
 
 MusicTab2:AddButton({
     Name = "عود حزين",
     Callback = function()
-        PlayMusic1(104085669063530)
+        PlayMusic(104085669063530)
     end
 })
 
 MusicTab2:AddButton({
     Name = "يمني وين الوفاء",
     Callback = function()
-        PlayMusic1(116150415085902)
+        PlayMusic(116150415085902)
     end
 })
 
 MusicTab2:AddButton({
     Name = "اغنيه سوريه",
     Callback = function()
-        PlayMusic1(98640789490482)
+        PlayMusic(98640789490482)
     end
 })
 
 MusicTab2:AddButton({
     Name = "اهات 😂",
     Callback = function()
-        PlayMusic1(8107899910)
+        PlayMusic(8107899910)
     end
 })
 
 MusicTab2:AddButton({
     Name = "رعب",
     Callback = function()
-        PlayMusic1(1848748988)
+        PlayMusic(1848748988)
     end
 })
 
 MusicTab2:AddButton({
     Name = "سبونج بوب",
     Callback = function()
-        PlayMusic1(2396797933)
+        PlayMusic(2396797933)
     end
 })
 
 MusicTab2:AddButton({
     Name = "اوووو",
     Callback = function()
-        PlayMusic1(93123670572331)
+        PlayMusic(93123670572331)
     end
 })
 
 MusicTab2:AddButton({
     Name = "ناني",
     Callback = function()
-        PlayMusic1(8842446965)
+        PlayMusic(8842446965)
     end
 })
 
 MusicTab2:AddButton({
     Name = "صوت مطي",
     Callback = function()
-        PlayMusic1(6900670817)
+        PlayMusic(6900670817)
     end
 })
 
 MusicTab2:AddButton({
     Name = "حقود",
     Callback = function()
-        PlayMusic1(4533138868)
+        PlayMusic(4533138868)
     end
 })
 
 MusicTab2:AddButton({
     Name = "مايكل جاكسن",
     Callback = function()
-        PlayMusic1(7061299253)
+        PlayMusic(7061299253)
     end
 })
 
 MusicTab2:AddButton({
     Name = "هديها شوي",
     Callback = function()
-        PlayMusic1(7644757406)
+        PlayMusic(7644757406)
     end
 })
 
 MusicTab2:AddButton({
     Name = "رمي",
     Callback = function()
-        PlayMusic1(2838571776)
+        PlayMusic(2838571776)
     end
 })
 
 MusicTab2:AddButton({
     Name = "سب",
     Callback = function()
-        PlayMusic1(7942547789)
+        PlayMusic(7942547789)
     end
 })
 
 MusicTab2:AddButton({
     Name = "تفحيط 2",
     Callback = function()
-        PlayMusic1(7173073353)
+        PlayMusic(7173073353)
     end
 })
