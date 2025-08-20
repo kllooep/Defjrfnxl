@@ -344,27 +344,31 @@ local function PlayMusic(id)
     end
 end
 
--- مربع إدخال ID
+local LastSongID = nil
+
 MusicTab:AddTextBox({
-    Name = "كود الأغنية",
-    PlaceholderText = "ادخل ID الصوت",
-    Callback = function(Value)
-        local id = tonumber(Value)
+    Name = "IDادخال",
+    Description = "IDفقط",
+    PlaceholderText = "07207502:مثل IDاكتب هنا",
+    Callback = function(value)
+        
+        local id = tostring(value):match("%d+")
         if id then
+            LastSongID = id
             PlayMusic(id)
-            -- (اختياري) إشعار نجاح
-            MusicTab:AddNotification({
-                Name = "تشغيل",
-                Content = "تم تشغيل الموسيقى بـ ID: " .. id,
-                Time = 3
-            })
         else
-            -- (اختياري) إشعار خطأ
-            MusicTab:AddNotification({
-                Name = "خطأ",
-                Content = "الرجاء إدخال رقم صحيح!",
-                Time = 5
-            })
+            warn("الرجاء إدخال ID صحيح (أرقام فقط)")
+        end
+    end
+})
+
+MusicTab:AddButton({
+    "تشغيل",
+    function()
+        if LastSongID then
+            PlayMusic(LastSongID)
+        else
+            warn("لا يوجد ID محفوظ. أدخل ID أولاً في الـ TextBox.")
         end
     end
 })
