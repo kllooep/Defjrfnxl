@@ -265,53 +265,6 @@ TabMusic:AddToggle({
     end
 })
 
-local Tablag = Window:MakeTab({
-    Name = "(قنبلة)",
-    Icon = "Bomb"
-})
-
-Tablag:AddToggle({
-    Name = "تفجير تلقائي للقنابل",
-    Default = false,
-    Callback = function(state)
-        if state then
-            -- تشغيل الحلقة
-            getgenv().AutoBombLoop = true
-            task.spawn(function()
-                while getgenv().AutoBombLoop do
-                    local player = game.Players.LocalPlayer
-                    local backpack = player.Backpack
-                    local character = player.Character or player.CharacterAdded:Wait()
-
-                    -- نجيب أداة البومب
-                    local bombTool = backpack:FindFirstChild("Bomb") or character:FindFirstChild("Bomb")
-
-                    if bombTool then
-                        -- نجهز الأداة (Equip)
-                        bombTool.Parent = character
-
-                        -- نرمي 10 قنابل متتالية
-                        for i = 1, 50 do
-                            if not getgenv().AutoBombLoop then break end
-                            task.wait(0.01) -- وقت بسيط بين كل قنبلة
-                            bombTool:Activate()
-                        end
-                    end
-
-                    task.wait(1) -- توقف 1 ثانية قبل التكرار (كما في الكود الأصلي)
-
-                    local args = {
-                        "BombNetroZHub"
-                    }
-                    game:GetService("ReplicatedStorage"):WaitForChild("RE"):WaitForChild("1Blo1wBomb1sServe1r"):FireServer(unpack(args))
-                end
-            end)
-        else
-            -- إيقاف الحلقة
-            getgenv().AutoBombLoop = false
-        end
-    end
-})
 
 local MusicTab = Window:MakeTab({
     Title = "اغاني عربية",
