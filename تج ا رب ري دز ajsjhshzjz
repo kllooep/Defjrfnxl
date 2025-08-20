@@ -11,15 +11,13 @@ Button = { Image = "rbxassetid://126128591607444", BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(35, 1) },
 })
 
-local TabMusic = Window:MakeTab({
+local Tab = Window:MakeTab({
     Title = "اغاني مجانية",
     Icon = "radio"
 })
 
-TabMusic:AddSection("اختيار الصوت")
+Tab:AddSection("اختيار الصوت")
 
-
-local selectedAudioID = nil
 
 
 local audios = {
@@ -64,41 +62,30 @@ local audios = {
     {Name = "(NEW) لا أفهم شيئًا", ID = 7962533987}
 }
 
--- استخراج الأسماء للقائمة المنسدلة
+local selectedAudioID
+
+-- Adicionar uma textbox para inserir o ID do áudio
+Tab:AddTextBox({
+    Name = "ادخال صوت الموسيقى",
+    Description = "الموسيقىIDاكتب ",
+    PlaceholderText = "ID do áudio",
+    Callback = function(value)
+        selectedAudioID = tonumber(value)
+    end
+})
+
+-- Adicionar uma dropdown para selecionar o áudio
 local audioNames = {}
 for _, audio in ipairs(audios) do
     table.insert(audioNames, audio.Name)
 end
 
-
-TabMusic:AddTextBox({
-    Name = "ادخال صوت الموسيقى",
-    PlaceholderText = "اكتب ID الصوت",
-    Callback = function(value)
-        local id = tonumber(value)
-        if id then
-            selectedAudioID = id
-            
-            TabMusic:AddNotification({
-                Name = "تم التحديث",
-                Content = "تم تعيين الصوت إلى ID: " .. id,
-                Time = 3
-            })
-        else
-            TabMusic:AddNotification({
-                Name = "خطأ",
-                Content = "الرجاء إدخال رقم صحيح!",
-                Time = 5
-            })
-        end
-    end
-})
-
-
-TabMusic:AddDropdown({
+Tab:AddDropdown({
     Name = "اختار صوت",
+    Description = "اختيار صوت من القائمة",
     Options = audioNames,
     Default = audioNames[1],
+    Flag = "selected_audio",
     Callback = function(value)
         for _, audio in ipairs(audios) do
             if audio.Name == value then
@@ -109,161 +96,149 @@ TabMusic:AddDropdown({
     end
 })
 
-
-TabMusic:AddSection("تشغيل الصوت (مرة واحدة)")
-
-local function playAudio()
-    if not selectedAudioID then
-        TabMusic:AddNotification({
-            Name = "خطأ",
-            Content = "لم يتم اختيار صوت!",
-            Time = 5
-        })
-        return
-    end
-
-    local args = {
-        [1] = workspace,
-        [2] = selectedAudioID,
-        [3] = 1
-    }
-    local GunSound = game:GetService("ReplicatedStorage"):FindFirstChild("1Gu1nSound1s")
-    if GunSound then
-        pcall(function()
-            GunSound:FireServer(unpack(args))
-        end)
-    end
-
-    task.spawn(function()
-        local sound = Instance.new("Sound")
-        sound.SoundId = "rbxassetid://" .. selectedAudioID
-        sound.Parent = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or workspace
-        sound:Play()
-        task.delay(5, function()
-            if sound and sound.Parent then
-                sound:Destroy()
-            end
-        end)
-    end)
-end
-
-TabMusic:AddButton({
-    Name = "تشغيل",
-    Callback = function()
-        playAudio()
-    end
-})
-
-
-TabMusic:AddSection("تكرار أو سبام الصوت")
-
+-- Controle do loop
 local audioLoop = false
 
+-- Nova seção para loop de áudio
+Tab:AddSection({"تكرار أو سبام الصوت"})
+
+-- Função para tocar o áudio repetidamente
 local function playLoopedAudio()
-    if not selectedAudioID then
-        TabMusic:AddNotification({
-            Name = "تحذير",
-            Content = "لم يتم اختيار صوت!",
-            Time = 5
-        })
-        return
-    end
+    while audioLoop do
+        if selectedAudioID then
+            local args = {
+                [1] = game:GetService("Workspace"),
+                [2] = selectedAudioID,
+                [3] = 1,
+            }
+            game:GetService("ReplicatedStorage").RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
 
-    getgenv().ChaosHub_AudioLoop = true
-
-    while getgenv().ChaosHub_AudioLoop do
-        local args = {
-            [1] = workspace,
-            [2] = selectedAudioID,
-            [3] = 1
-        }
-        local GunSound = game:GetService("ReplicatedStorage"):FindFirstChild("1Gu1nSound1s")
-        if GunSound then
-            pcall(function()
-                GunSound:FireServer(unpack(args))
-            end)
-        end
-
-        task.spawn(function()
+            -- Criar e tocar o áudio
             local sound = Instance.new("Sound")
             sound.SoundId = "rbxassetid://" .. selectedAudioID
-            sound.Parent = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or workspace
+            sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
             sound:Play()
-            task.delay(0.5, function()
-                if sound and sound.Parent then
-                    sound:Destroy()
-                end
-            end)
-        end)
+        else
+            warn("Nenhum áudio selecionado!")
+        end
 
-        task.wait(0.5)
+        task.wait(0.5) -- Pequeno delay para evitar sobrecarga
     end
 end
 
-TabMusic:AddToggle({
+-- Toggle para loop de áudio
+Tab:AddToggle({
     Name = "تفعيل اغنية تلقائي",
+    Description = "سبام اغنية",
     Default = false,
-    Callback = function(state)
-        audioLoop = state
+    Flag = "audio_loop",
+    Callback = function(value)
+        audioLoop = value
         if audioLoop then
-            if not selectedAudioID then
-                TabMusic:AddNotification({
-                    Name = "خطأ",
-                    Content = "اختر صوتًا أولًا!",
-                    Time = 5
-                })
-                LoopSection:Set(false)
-                return
-            end
-            task.spawn(playLoopedAudio)
-        else
-            getgenv().ChaosHub_AudioLoop = false
+            task.spawn(playLoopedAudio) -- Inicia o loop em uma nova thread
         end
     end
 })
 
-TabMusic:AddSection("صوت قوي للجميع")
+-- Adicionar um parágrafo como label
+Tab:AddParagraph({"Info", "تكرار الصوت (كل اللاعبين يسمعوه)"})
 
-local audioID = 6314880174
+-- Função para tocar o áudio normal
+local function playAudio()
+    if selectedAudioID then
+        local args = {
+            [1] = game:GetService("Workspace"),
+            [2] = selectedAudioID,
+            [3] = 1,
+        }
+        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Gu1nSound1s"):FireServer(unpack(args))
+
+        -- Criar e tocar o áudio
+        local sound = Instance.new("Sound")
+        sound.SoundId = "rbxassetid://" .. selectedAudioID
+        sound.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
+        sound:Play()
+    else
+        warn("Nenhum áudio selecionado!")
+    end
+end
+
+-- Nova seção para tocar áudio
+Tab:AddSection({"تشغيل الصوت(مرة1) "})
+
+-- Botão para tocar o áudio
+Tab:AddButton({"تشغيل", function()
+    playAudio()
+end})
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local audioID = 6314880174 -- ID fixo do áudio
 
 local function Audio_All_ClientSide(ID)
-    if type(ID) ~= "number" then return end
-    task.spawn(function()
-        local sound = Instance.new("Sound")
-        sound.SoundId = "rbxassetid://" .. ID
-        sound.Volume = 1
-        sound.Parent = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or workspace
-        sound:Play()
-        task.delay(1, function()
-            if sound and sound.Parent then
-                sound:Destroy()
-            end
-        end)
-    end)
+    local function CheckFolderAudioAll()
+        local FolderAudio = workspace:FindFirstChild("Audio all client")
+        if not FolderAudio then
+            FolderAudio = Instance.new("Folder")
+            FolderAudio.Name = "Audio all client"
+            FolderAudio.Parent = workspace
+        end
+        return FolderAudio
+    end
+
+    local function CreateSound(ID)
+        if type(ID) ~= "number" then
+            print("Insira um número válido!")
+            return nil
+        end
+
+        local Folder_Audio = CheckFolderAudioAll()
+        if Folder_Audio then
+            local Sound = Instance.new("Sound")
+            Sound.SoundId = "rbxassetid://" .. ID
+            Sound.Volume = 1
+            Sound.Looped = false
+            Sound.Parent = Folder_Audio
+            Sound:Play()
+            task.wait(1) -- Tempo de espera antes de remover o som
+            Sound:Destroy()
+        end
+    end
+
+    CreateSound(ID)
 end
 
 local function Audio_All_ServerSide(ID)
-    if type(ID) ~= "number" then return end
-    local event = game:GetService("ReplicatedStorage"):FindFirstChild("1Gu1nSound1s")
-    if event then
-        pcall(function()
-            event:FireServer(workspace, ID, 1)
-        end)
+    if type(ID) ~= "number" then
+        print("Insira um número válido!")
+        return nil
+    end
+
+    local GunSoundEvent = ReplicatedStorage:FindFirstChild("1Gu1nSound1s", true)
+    if GunSoundEvent then
+        GunSoundEvent:FireServer(workspace, ID, 1)
     end
 end
 
-TabMusic:AddToggle({
+-- Toggle para "Estorar ouvido de geral"
+Tab:AddToggle({
     Name = "صوت يشگ الاذان",
+    Description = "صوت قوي متكرر",
     Default = false,
-    Callback = function(state)
-        getgenv().ChaosHub_AudioSpam = state
-        while getgenv().ChaosHub_AudioSpam do
+    Flag = "audio_spam",
+    Callback = function(value)
+        getgenv().Audio_All_loop_fast = value
+
+        while getgenv().Audio_All_loop_fast do
             Audio_All_ServerSide(audioID)
-            Audio_All_ClientSide(audioID)
-            task.wait(0.03)
+            task.spawn(function()
+                Audio_All_ClientSide(audioID)
+            end)
+            task.wait(0.03) -- Delay extremamente rápido (0.03 segundos)
         end
     end
 })
+
+Tab:AddParagraph({"Info", "صوت للكل"})
 
 
 local MusicTab = Window:MakeTab({
@@ -438,14 +413,14 @@ MusicTab:AddButton({
     end
 })
 
-MusicTab2:AddButton({
+MusicTab:AddButton({
     Name = "يمني وين الوفاء",
     Callback = function()
         PlayMusic(116150415085902)
     end
 })
 
-MusicTab2:AddButton({
+MusicTab:AddButton({
     Name = "اغنيه سوريه",
     Callback = function()
         PlayMusic(98640789490482)
@@ -470,7 +445,7 @@ MusicTab:AddButton({
     end
 })
 
-MusicTab2:AddButton({
+MusicTab:AddButton({
     Name = "دبكة مصري",
     Callback = function()
         PlayMusic(76698985299412)
