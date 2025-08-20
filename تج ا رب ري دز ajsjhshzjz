@@ -498,51 +498,6 @@ MusicTab:AddButton({
         PlayMusic(90807238125839)
     end
 })
-  MusicTab:AddSection({
-    Name = "قرآن"
-})
-
-MusicTab:AddButton({
-    Name = "هل لك سر عند الله",
-    Callback = function()
-        PlayMusic(89807249526206)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "سورة البقرة",
-    Callback = function()
-        PlayMusic(1836685929)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "وقضى ربك الا تعبدو",
-    Callback = function()
-        PlayMusic(113184639716766)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "آية الكرسي",
-    Callback = function()
-        PlayMusic(113267251759253)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "سورة الفاتحة",
-    Callback = function()
-        PlayMusic(104251523505775)
-    end
-})
-
-MusicTab:AddButton({
-    Name = "وكان الله غفورا رحيما",
-    Callback = function()
-        PlayMusic(94610377976036)
-    end
-})
 
 MusicTab:AddSection({
     Name = "السب"
@@ -748,9 +703,81 @@ MusicTabPH:AddButton({
     end
 })
 
+local MusicTabQ = Window:MakeTab({
+    Title = "قرآن",
+    Icon = "book"
+})
+
+MusicTabQ:AddSection({
+    Name = "قرآن"
+})
+
+MusicTabQ:AddButton({
+    Name = "هل لك سر عند الله",
+    Callback = function()
+        PlayMusic(89807249526206)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "سورة البقرة",
+    Callback = function()
+        PlayMusic(1836685929)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "وقضى ربك الا تعبدو",
+    Callback = function()
+        PlayMusic(113184639716766)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "آية الكرسي",
+    Callback = function()
+        PlayMusic(113267251759253)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "سورة الفاتحة",
+    Callback = function()
+        PlayMusic(104251523505775)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "وكان الله غفورا رحيما",
+    Callback = function()
+        PlayMusic(94610377976036)
+    end
+}) 
+
+MusicTabQ:AddButton({
+    Name = "سورة الفلق",
+    Callback = function()
+        PlayMusic(86911769585232)
+    end
+}) 
+
+MusicTabQ:AddButton({
+    Name = "لِألاف قريش",
+    Callback = function()
+        PlayMusic(133272041755020)
+    end
+})
+
+MusicTabQ:AddButton({
+    Name = "قل هو الله احد",
+    Callback = function()
+        PlayMusic(88269497623993)
+    end
+}) 
+
 local MusicTab2 = Window:MakeTab({
     Title = "اغاني منوع",
-    Icon = "rbxassetid://119290839281477"
+    Icon = "music"
 })
 
 MusicTab2:AddButton({
@@ -775,31 +802,11 @@ MusicTab2:AddButton({
     end
 })
 
-MusicTab2:AddButton({
-    Name = "سورة الفلق",
-    Callback = function()
-        PlayMusic(86911769585232)
-    end
-})
 
 MusicTab2:AddButton({
     Name = "في عالم",
     Callback = function()
         PlayMusic(125151253990122)
-    end
-})
-
-MusicTab2:AddButton({
-    Name = "لِألاف قريش",
-    Callback = function()
-        PlayMusic(133272041755020)
-    end
-})
-
-MusicTab2:AddButton({
-    Name = "قل هو الله احد",
-    Callback = function()
-        PlayMusic(88269497623993)
     end
 })
 
