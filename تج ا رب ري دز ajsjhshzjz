@@ -871,8 +871,6 @@ MusicTab2:AddButton({
 })
 
 
-
-
 MusicTab2:AddButton({
     Name = "ضراط",
     Callback = function()
@@ -952,14 +950,14 @@ MusicTab2:AddButton({
     end
 })
 
-MusicTab:AddButton({
+MusicTab2:AddButton({
     Name = "صوت اشعار سامسونج",
     Callback = function()
         PlayMusic(7288899492)
     end
 })
 
-MusicTab:AddButton({
+MusicTab2:AddButton({
     Name = "وش فيك",
     Callback = function()
         PlayMusic(7341215833)
