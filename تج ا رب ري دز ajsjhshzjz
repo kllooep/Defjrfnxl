@@ -314,7 +314,7 @@ Tablag:AddToggle({
 })
 
 local MusicTab = Window:MakeTab({
-    Name = "اغاني عربية",
+    Title = "اغاني عربية",
     Icon = "music"
 })
 
