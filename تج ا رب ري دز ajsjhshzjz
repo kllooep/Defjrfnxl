@@ -1,29 +1,27 @@
 local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
 
--- إنشاء النافذة (إذا لم تكن موجودة)
 local Window = redzlib:MakeWindow({
-    Name = "ChaosHub",
-    SubTitle = "by redz9999",
-    SaveFolder = "ChaosHubMusic"
+    Name = "NetroZ Music",
+    SubTitle = "by Rami",
+    SaveFolder = "NetroZHubMusic"
 })
 
 Window:AddMinimizeButton({
 Button = { Image = "rbxassetid://71014873973869", BackgroundTransparency = 0 },
 Corner = { CornerRadius = UDim.new(35, 1) },
 })
--- إنشاء تاب "اغاني مجانية"
+
 local TabMusic = Window:MakeTab({
     Title = "اغاني مجانية",
     Icon = "radio"
 })
 
--- ==================== القسم 1: اختيار الصوت ====================
 TabMusic:AddSection("اختيار الصوت")
 
--- متغير لتخزين الـ ID المختار
+
 local selectedAudioID = nil
 
--- قائمة الصوتيات
+
 local audios = {
     {Name = "صراخ", ID = 5710016194},
     {Name = "مخيف", ID = 85435253347146},
@@ -72,7 +70,7 @@ for _, audio in ipairs(audios) do
     table.insert(audioNames, audio.Name)
 end
 
--- === مربع إدخال ID (تم وضعه أولًا في القسم) ===
+
 TabMusic:AddTextBox({
     Name = "ادخال صوت الموسيقى",
     PlaceholderText = "اكتب ID الصوت",
@@ -80,7 +78,7 @@ TabMusic:AddTextBox({
         local id = tonumber(value)
         if id then
             selectedAudioID = id
-            -- (اختياري) إشعار عند التحديث
+            
             TabMusic:AddNotification({
                 Name = "تم التحديث",
                 Content = "تم تعيين الصوت إلى ID: " .. id,
@@ -96,7 +94,7 @@ TabMusic:AddTextBox({
     end
 })
 
--- === القائمة المنسدلة ===
+
 TabMusic:AddDropdown({
     Name = "اختار صوت",
     Options = audioNames,
@@ -111,7 +109,7 @@ TabMusic:AddDropdown({
     end
 })
 
--- ==================== القسم 2: تشغيل مرة واحدة ====================
+
 TabMusic:AddSection("تشغيل الصوت (مرة واحدة)")
 
 local function playAudio()
@@ -156,7 +154,7 @@ TabMusic:AddButton({
     end
 })
 
--- ==================== القسم 3: تكرار الصوت ====================
+
 TabMusic:AddSection("تكرار أو سبام الصوت")
 
 local audioLoop = false
@@ -224,7 +222,6 @@ TabMusic:AddToggle({
     end
 })
 
--- ==================== القسم 4: صوت قوي للجميع ====================
 TabMusic:AddSection("صوت قوي للجميع")
 
 local audioID = 6314880174
@@ -267,10 +264,6 @@ TabMusic:AddToggle({
         end
     end
 })
-
-
-________________________________
-
 
 local Tablag = Window:MakeTab({
     Name = "(قنبلة)",
@@ -320,17 +313,13 @@ Tablag:AddToggle({
     end
 })
 
-__________________________________
-
 local MusicTab = Window:MakeTab({
     Name = "(gamepass)أغاني",
     Icon = "music"
 })
 
--- ==================== قسم: إدخال الكود يدويًا ====================
 MusicTab:AddSection("ادخل كود الأغنية")
 
--- دالة عامة لتشغيل الموسيقى
 local function PlayMusic(id)
     local args1 = { [1] = "SkateBoard" }
     local args2 = { [1] = "PickingScooterMusicText", [2] = id }
