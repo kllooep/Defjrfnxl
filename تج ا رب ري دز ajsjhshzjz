@@ -18,6 +18,107 @@ local Tab = Window:MakeTab({
 
 Tab:AddSection("اختيار الصوت")
 
+-- دالة لتنظيم الأدوات في شكل كرة فوق الرأس
+local function organizarItensEmBolaAcima()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local backpack = player.Backpack
+    local rootPart = character:WaitForChild("HumanoidRootPart")
+
+    -- جمع جميع أدوات FireX من الشخصية والمخزن
+    local itens = {}
+
+    for _, item in pairs(character:GetChildren()) do
+        if item:IsA("Tool") and item.Name == "FireX" then
+            table.insert(itens, item)
+        end
+    end
+
+    for _, item in pairs(backpack:GetChildren()) do
+        if item:IsA("Tool") and item.Name == "FireX" then
+            table.insert(itens, item)
+        end
+    end
+
+    -- التحقق من وجود أدوات
+    if #itens == 0 then
+        warn("لا توجد أدوات FireX للتنظيم.")
+        return
+    end
+
+    -- مركز الكرة: فوق الرأس (نستخدم الرأس أو HumanoidRootPart)
+    local head = character:FindFirstChild("Head") or rootPart
+    local center = head.Position + Vector3.new(0, -5, 0) -- 5 وحدات فوق الرأس
+
+    -- نصف قطر الكرة
+    local radius = 8
+
+    -- زاوية عشوائية لتوزيع متساوٍ تقريبًا (Spherical Distribution)
+    for i, item in pairs(itens) do
+        -- زوايا عشوائية
+        local phi = math.acos(1 - 2 * (i / (#itens + 1))) -- توزيع متساوٍ على المحور Y
+        local theta = 7.777 * i -- رقم غير منطقي يقلل من التكرار (مثل 7.777)
+
+        -- التحويل إلى إحداثيات كروية
+        local x = math.cos(theta) * math.sin(phi)
+        local y = math.cos(phi)
+        local z = math.sin(theta) * math.sin(phi)
+
+        -- تحديد الموضع على سطح الكرة
+        local pos = center + Vector3.new(x, y, z) * radius
+
+        -- تجهيز الأداة لتعديل GripPos
+        item.Parent = character
+
+        -- ضبط GripPos بحيث تظهر الأداة في الموضع المطلوب
+        item.GripPos = pos - rootPart.Position
+
+        task.wait(0.01) -- تأخير بسيط لرؤية التأثير
+
+        -- إعادة الأداة إلى المخزن (حتى لا تعيق اللاعب)
+        item.Parent = backpack
+    end
+
+    -- تجهيز جميع أدوات FireX مرة أخيرة (لترى الكرة)
+    for _, item in pairs(backpack:GetChildren()) do
+        if item:IsA("Tool") and item.Name == "FireX" then
+            item.Parent = character
+        end
+    end
+end
+
+Tab:AddButton({
+    Name = "Firex كرة عملاقة فوق الرأس",
+    Callback = function()
+        local Player = game.Players.LocalPlayer 
+        local Character = Player.Character or Player.CharacterAdded:Wait()
+        local RootPart = Character:WaitForChild("HumanoidRootPart")
+        
+        -- البحث عن الكائن
+        local Clone = game:GetService("Workspace"):FindFirstChild("WorkspaceCom") 
+            and game:GetService("Workspace").WorkspaceCom:FindFirstChild("001_GiveTools")
+            and game:GetService("Workspace").WorkspaceCom["001_GiveTools"]:FindFirstChild("FireX")
+
+        if Clone and Clone:FindFirstChild("ClickDetector") then
+            local OldPos = RootPart.CFrame
+
+            -- جمع 600 أداة
+            for i = 1, 600 do
+                RootPart.CFrame = Clone.CFrame
+                fireclickdetector(Clone.ClickDetector)
+                task.wait()
+            end
+
+            -- العودة
+            RootPart.CFrame = OldPos
+
+            -- تنفيذ تنظيم الكرة
+            organizarItensEmBolaAcima()
+        else
+            warn("FireX أو ClickDetector غير موجود!")
+        end
+    end
+})
 
 
 local audios = {
