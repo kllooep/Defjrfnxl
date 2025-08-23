@@ -1,5 +1,4 @@
-local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/Library-ui/refs/heads/main/Redzhubui"))()
-
+local redzlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/ghostzx64/star/refs/heads/main/LIBRARY%20AZUL"))()
 local Window = redzlib:MakeWindow({
     Name = "NetroZ Music",
     SubTitle = "by Rami&Ghali",
