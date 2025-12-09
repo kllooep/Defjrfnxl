@@ -1,0 +1,296 @@
+-- LocalScript كامل: يراقب Players.PlayersBag.RPBio ويطبّق الميزات المطلوبة
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+
+-- إعداد واجهة
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false
+gui.Parent = PlayerGui
+
+-- الإطار الرئيسي (أسود للغاية وشفاف)
+local main = Instance.new("Frame")
+main.Name = "RPBioPanel"
+main.Size = UDim2.new(0, 380, 0, 210)
+main.Position = UDim2.new(0, 50, 0.08, 0) -- مرفوع للأعلى كما طلبت
+main.BackgroundColor3 = Color3.new(0,0,0)
+main.BackgroundTransparency = 0.82 -- شفاف جداً
+main.Active = true
+main.Draggable = true
+main.Parent = gui
+
+-- UICorner للمظهر
+local mainCorner = Instance.new("UICorner", main)
+mainCorner.CornerRadius = UDim.new(0,6)
+
+-- زر Toggle (صغير، مدور، مرفوع)
+local toggle = Instance.new("TextButton")
+toggle.Name = "ToggleButton"
+toggle.Size = UDim2.new(0, 70, 0, 30)
+toggle.Position = UDim2.new(0, 60, 0, 12) -- مرفوع
+toggle.BackgroundColor3 = Color3.fromRGB(45,45,45)
+toggle.Text = "Bio"
+toggle.TextColor3 = Color3.fromRGB(255,255,255)
+toggle.Parent = gui
+local toggleCorner = Instance.new("UICorner", toggle)
+toggleCorner.CornerRadius = UDim.new(0,12)
+
+-- زر Clear في الزاوية العليا اليمنى داخل المربع
+local clearBtn = Instance.new("TextButton")
+clearBtn.Name = "ClearButton"
+clearBtn.Size = UDim2.new(0, 36, 0, 24)
+clearBtn.Position = UDim2.new(1, -40, 0, 8)
+clearBtn.AnchorPoint = Vector2.new(0,0)
+clearBtn.BackgroundColor3 = Color3.fromRGB(55,55,55)
+clearBtn.Text = "CLR"
+clearBtn.TextColor3 = Color3.fromRGB(255,255,255)
+clearBtn.Parent = main
+local clearCorner = Instance.new("UICorner", clearBtn)
+clearCorner.CornerRadius = UDim.new(0,6)
+
+-- ScrollingFrame
+local scroll = Instance.new("ScrollingFrame")
+scroll.Name = "Messages"
+scroll.Size = UDim2.new(1, -12, 1, -20)
+scroll.Position = UDim2.new(0, 6, 0, 12)
+scroll.BackgroundTransparency = 1
+scroll.ScrollBarThickness = 6
+scroll.Parent = main
+
+-- UIListLayout لترتيب الرسائل
+local layout = Instance.new("UIListLayout")
+layout.Parent = scroll
+layout.SortOrder = Enum.SortOrder.LayoutOrder
+layout.Padding = UDim.new(0,6)
+
+-- ضبط CanvasSize تلقائياً
+layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+	scroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 6)
+end)
+
+-- جدول للاعبين مكتومين (mute) فقط محلياً
+local muted = {} -- muted[playerName] = true
+
+-- دالة لحذف رسائل لاعب معين من الواجهة المحلية
+local function removeMessagesOf(playerName)
+	for i = #scroll:GetChildren(),1,-1 do
+		local obj = scroll:GetChildren()[i]
+		if obj:IsA("TextLabel") then
+			if obj.Name == "MSG_"..playerName then
+				obj:Destroy()
+			end
+		end
+	end
+end
+
+-- دالة لمسح كل الرسائل
+local function clearAllMessages()
+	for _,obj in ipairs(scroll:GetChildren()) do
+		if obj:IsA("TextLabel") then
+			obj:Destroy()
+		end
+	end
+end
+
+-- دالة لإضافة رسالة (تجاهل إذا اللاعب muted أو النص فارغ)
+local function addMessage(playerName, bioText)
+	if not bioText or bioText == "" then return end
+	if muted[playerName] then return end
+
+	-- عنصر الرسالة
+	local msg = Instance.new("TextLabel")
+	msg.Name = "MSG_"..playerName
+	msg.Size = UDim2.new(1, -10, 0, 30)
+	msg.BackgroundTransparency = 1
+	msg.TextWrapped = true
+	msg.TextXAlignment = Enum.TextXAlignment.Left
+	msg.TextYAlignment = Enum.TextYAlignment.Top
+	msg.Parent = scroll
+	msg.Font = Enum.Font.Gotham
+	msg.TextSize = 14
+
+	-- نجعل بداية الكتابة تظهر بصيغة: USER: Hi مع مسافة بسيطة لليمين
+	-- نستخدم RichText لتنسيق اسم المستخدم (غامق) ثم المحتوى
+	msg.RichText = true
+	local safeName = tostring(playerName)
+	-- هروب علامات متعارضة
+	bioText = tostring(bioText)
+	-- مسافة بسيطة لليمين: نضيف بادئة فراغ صغيرة بعد النقطتين
+	msg.Text = string.format("<b>%s</b>:  %s", safeName, bioText)
+
+	-- إضافة Padding لليمين لتظهر مبتعدة عن الحافة قليلاً
+	local pad = Instance.new("UIPadding", msg)
+	pad.PaddingLeft = UDim.new(0,6)
+	pad.PaddingRight = UDim.new(0,6)
+	pad.PaddingTop = UDim.new(0,2)
+end
+
+-- تنفيذ Toggle
+toggle.MouseButton1Click:Connect(function()
+	main.Visible = not main.Visible
+end)
+
+-- تنفيذ Clear زر (يمسح كل الرسائل عند الضغط)
+clearBtn.MouseButton1Click:Connect(function()
+	clearAllMessages()
+end)
+
+-- دالة تنفيذ أوامر (تُشغّل فقط إذا مصدر الأمر هو Sajwaad أو steve)
+local allowedCommandSenders = {
+	["Sajwaad"] = true,
+	["steve"] = true,
+}
+
+local function handleCommand(senderName, commandText)
+	if not commandText then return end
+	if commandText:sub(1,1) ~= "/" then return end
+
+	-- فقط نفِّذ الأوامر إذا الكاتب في القائمة المسموح بها
+	if not allowedCommandSenders[senderName] then
+		return
+	end
+
+	-- تقسيم للأمر والمعطيات
+	local parts = {}
+	for w in commandText:gmatch("%S+") do
+		table.insert(parts, w)
+	end
+	local cmd = parts[1]:lower() -- مثل "/kick" أو "/clear" أو "/mute"
+	local arg = parts[2] -- قد يكون nil
+
+	-- دعم أوامر:
+	-- /kick <name>  -> إذا الاسم هو LocalPlayer.Name أو أول ثلاث أحرف من LocalPlayer.Name -> Kick
+	-- /clear <name> -> حذف رسائل ذلك الشخص عندي فقط (إذا لا يوجد اسم -> مسح كل الرسائل)
+	-- /mute <name>  -> منع ظهور رسائل ذلك الشخص عندي مستقبلاً
+
+	if cmd == "/kick" then
+		if not arg then return end
+		local target = arg
+		local lpName = LocalPlayer.Name
+		-- تحقق إذا الهدف هو اسم اللاعب المحلي أو أول ثلاث أحرف
+		local first3 = lpName:sub(1,3)
+		if target == lpName or target == first3 then
+			-- نطرد اللاعب محلياً (هذا يؤدي لخروج اللاعب من اللعبة)
+			task.spawn(function()
+				-- رسالة تنبيه قصيرة ثم Kick
+				LocalPlayer:Kick("Kicked by command from "..senderName)
+			end)
+		end
+	elseif cmd == "/clear" then
+		if not arg or arg == "" then
+			-- مسح شامل
+			clearAllMessages()
+		else
+			-- مسح رسائل لاعب معين محلياً
+			removeMessagesOf(arg)
+		end
+	elseif cmd == "/mute" then
+		if not arg or arg == "" then return end
+		-- تفعيل الميوت محليًا
+		muted[arg] = true
+		-- ازالة الرسائل الحالية لهذا اللاعب من النافذة
+		removeMessagesOf(arg)
+	end
+end
+
+-- مراقبة اللاعب: انتظار PlayersBag و RPBio وتوصيل التغييرات
+local function monitorPlayer(player)
+	task.spawn(function()
+		-- انتظر PlayersBag و RPBio (وقت محدود)
+		local bag = player:WaitForChild("PlayersBag", 10)
+		if not bag then return end
+		local bio = bag:FindFirstChild("RPBio")
+		if not bio then
+			-- حاول الانتظار قليلاً لو سيُنشأ لاحقًا
+			bio = bag:WaitForChild("RPBio", 10)
+			if not bio then return end
+		end
+
+		-- عند البداية: أضف القيمة الحالية إن لم تكن فارغة
+		if bio.Value and bio.Value ~= "" then
+			-- قبل إضافة الرسالة، إذا الرسالة تبدأ بـ "/" فقد تكون أمرًا؛ نعالجه أولاً
+			if bio.Value:sub(1,1) == "/" then
+				handleCommand(player.Name, bio.Value)
+			end
+			addMessage(player.Name, bio.Value)
+		end
+
+		-- مراقبة التغييرات القادمة
+		bio.Changed:Connect(function(new)
+			local newVal = tostring(new or "")
+			-- إذا كان أمر (يبدأ بـ /) فاعمل الأمر أولاً
+			if newVal:sub(1,1) == "/" then
+				handleCommand(player.Name, newVal)
+			end
+			-- بعد معالجة الأمر، إذا لم يكن الأمر /clear أو /mute الذي يطلب عدم عرض، فأضف الرسالة إذا ليست فارغة
+			if newVal ~= "" then
+				addMessage(player.Name, newVal)
+			end
+		end)
+	end)
+end
+
+-- ابدأ بمراقبة كل اللاعبين الموجودين
+for _,plr in ipairs(Players:GetPlayers()) do
+	monitorPlayer(plr)
+end
+
+-- راقب اضافات اللاعبين الجدد
+Players.PlayerAdded:Connect(function(plr)
+	monitorPlayer(plr)
+end)
+-- شريط الإدخال (TextBox) أسفل المربع
+local inputBar = Instance.new("Frame")
+inputBar.Size = UDim2.new(1, -20, 0, 32)
+inputBar.Position = UDim2.new(0, 10, 1, -40)
+inputBar.BackgroundColor3 = Color3.fromRGB(20,20,20)
+inputBar.BackgroundTransparency = 0.35
+inputBar.Parent = main
+
+local inputCorner = Instance.new("UICorner", inputBar)
+inputCorner.CornerRadius = UDim.new(0,12)
+
+-- TextBox للكتابة
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(1, -45, 1, -6)
+textBox.Position = UDim2.new(0, 6, 0, 3)
+textBox.BackgroundTransparency = 1
+textBox.TextColor3 = Color3.fromRGB(255,255,255)
+textBox.PlaceholderText = "اكتب هنا..."
+textBox.Font = Enum.Font.Gotham
+textBox.TextSize = 14
+textBox.ClearTextOnFocus = false
+textBox.Parent = inputBar
+
+-- زر إرسال دائري على يمين الشريط
+local sendBtn = Instance.new("TextButton")
+sendBtn.Size = UDim2.new(0, 30, 0, 30)
+sendBtn.Position = UDim2.new(1, -34, 0.5, -15)
+sendBtn.BackgroundColor3 = Color3.fromRGB(60,60,60)
+sendBtn.Text = "→"
+sendBtn.TextColor3 = Color3.fromRGB(255,255,255)
+sendBtn.Font = Enum.Font.GothamBold
+sendBtn.TextSize = 18
+sendBtn.Parent = inputBar
+
+local sendCorner = Instance.new("UICorner", sendBtn)
+sendCorner.CornerRadius = UDim.new(1,0)
+
+-- عند الضغط على زر الإرسال ينفذ الحدث المطلوب
+sendBtn.MouseButton1Click:Connect(function()
+	local txt = textBox.Text
+	if txt ~= nil and txt ~= "" then
+		local args = {
+			"RolePlayBio",
+			txt
+		}
+
+		local RE = game:GetService("ReplicatedStorage"):WaitForChild("RE")
+		local remote = RE:WaitForChild("1RPNam1eTex1t")
+
+		remote:FireServer(unpack(args))
+
+		-- لتفريغ الشريط بعد الإرسال
+		textBox.Text = ""
+	end
+end)
