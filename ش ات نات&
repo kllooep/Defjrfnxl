@@ -61,6 +61,7 @@ clearBtn.TextColor3 = Color3.fromRGB(255,255,255)
 clearBtn.Parent = main
 local clearCorner = Instance.new("UICorner", clearBtn)
 clearCorner.CornerRadius = UDim.new(0,6)
+clearBtn.ZIndex = 14
 
 -- ScrollingFrame
 local scroll = Instance.new("ScrollingFrame")
