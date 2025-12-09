@@ -1,4 +1,3 @@
--- LocalScript كامل: يراقب Players.PlayersBag.RPBio ويطبّق الميزات المطلوبة
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
@@ -8,32 +7,47 @@ local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.Parent = PlayerGui
 
--- الإطار الرئيسي (أسود للغاية وشفاف)
+-- الإطار الرئيسي (Panel)
 local main = Instance.new("Frame")
 main.Name = "RPBioPanel"
 main.Size = UDim2.new(0, 380, 0, 210)
-main.Position = UDim2.new(0, 50, 0.08, 0) -- مرفوع للأعلى كما طلبت
+main.Position = UDim2.new(0, 50, 0.08, 0)
 main.BackgroundColor3 = Color3.new(0,0,0)
-main.BackgroundTransparency = 0.82 -- شفاف جداً
+main.BackgroundTransparency = 0.82
 main.Active = true
-main.Draggable = true
+main.Draggable = true -- الإطار نفسه draggable
+main.Visible = false -- إخفاء عند البداية
 main.Parent = gui
 
--- UICorner للمظهر
+-- UICorner للإطار
 local mainCorner = Instance.new("UICorner", main)
 mainCorner.CornerRadius = UDim.new(0,6)
 
--- زر Toggle (صغير، مدور، مرفوع)
-local toggle = Instance.new("TextButton")
+-- زر Toggle دائري
+local toggle = Instance.new("ImageButton") -- استخدم ImageButton لوضع الصورة
 toggle.Name = "ToggleButton"
-toggle.Size = UDim2.new(0, 70, 0, 30)
-toggle.Position = UDim2.new(0, 60, 0, 12) -- مرفوع
+toggle.Size = UDim2.new(0, 40, 0, 40) -- صغير ودائري
+toggle.Position = UDim2.new(0, 60, 0, 12)
 toggle.BackgroundColor3 = Color3.fromRGB(45,45,45)
-toggle.Text = "Bio"
-toggle.TextColor3 = Color3.fromRGB(255,255,255)
+toggle.Image = "rbxassetid://76365897790598" -- صورتك
+toggle.ScaleType = Enum.ScaleType.Fit
+toggle.AutoButtonColor = true
 toggle.Parent = gui
+
+-- جعل الزر دائري
 local toggleCorner = Instance.new("UICorner", toggle)
-toggleCorner.CornerRadius = UDim.new(0,12)
+toggleCorner.CornerRadius = UDim.new(0,20) -- نصف الطول = دائرة
+
+-- جعل الزر draggable
+toggle.Active = true
+toggle.Draggable = true
+
+-- وظيفة فتح/إغلاق الإطار عند الضغط
+local isOpen = false
+toggle.MouseButton1Click:Connect(function()
+    isOpen = not isOpen
+    main.Visible = isOpen
+end)
 
 -- زر Clear في الزاوية العليا اليمنى داخل المربع
 local clearBtn = Instance.new("TextButton")
@@ -42,7 +56,7 @@ clearBtn.Size = UDim2.new(0, 36, 0, 24)
 clearBtn.Position = UDim2.new(1, -40, 0, 8)
 clearBtn.AnchorPoint = Vector2.new(0,0)
 clearBtn.BackgroundColor3 = Color3.fromRGB(55,55,55)
-clearBtn.Text = "CLR"
+clearBtn.Text = "مسح"
 clearBtn.TextColor3 = Color3.fromRGB(255,255,255)
 clearBtn.Parent = main
 local clearCorner = Instance.new("UICorner", clearBtn)
