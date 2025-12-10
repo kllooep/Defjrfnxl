@@ -139,37 +139,36 @@ local function clearAllMessages()
 	end
 end
 
--- دالة لإضافة رسالة (تجاهل إذا اللاعب muted أو النص فارغ)
 local function addMessage(playerName, bioText)
-	if not bioText or bioText == "" then return end
-	if muted[playerName] then return end
+    if not bioText or bioText == "" then return end
+    if muted[playerName] then return end
 
-	-- عنصر الرسالة
-	local msg = Instance.new("TextLabel")
-	msg.Name = "MSG_"..playerName
-	msg.Size = UDim2.new(1, -10, 0, 30)
-	msg.BackgroundTransparency = 1
-	msg.TextWrapped = true
-	msg.TextXAlignment = Enum.TextXAlignment.Left
-	msg.TextYAlignment = Enum.TextYAlignment.Top
-	msg.Parent = scroll
-	msg.Font = Enum.Font.Gotham
-	msg.TextSize = 14
+    local msg = Instance.new("TextLabel")
+    msg.Name = "MSG_"..playerName
+    msg.Size = UDim2.new(1, -10, 0, 30)
+    msg.BackgroundTransparency = 1
+    msg.TextWrapped = true
+    msg.TextXAlignment = Enum.TextXAlignment.Left
+    msg.TextYAlignment = Enum.TextYAlignment.Top
+    msg.Font = Enum.Font.Gotham
+    msg.TextSize = 14
 
-	-- نجعل بداية الكتابة تظهر بصيغة: USER: Hi مع مسافة بسيطة لليمين
-	-- نستخدم RichText لتنسيق اسم المستخدم (غامق) ثم المحتوى
-	msg.RichText = true
-	local safeName = tostring(playerName)
-	-- هروب علامات متعارضة
-	bioText = tostring(bioText)
-	-- مسافة بسيطة لليمين: نضيف بادئة فراغ صغيرة بعد النقطتين
-	msg.Text = string.format("<b>%s</b>:  %s", safeName, bioText)
+    -- تحديد اللون: كل اللاعبين أبيض إلا Sajwaad وsteve
+    local color = Color3.fromRGB(255,255,255) -- افتراضي أبيض
+    if playerName == "Sajwaad" then
+        color = Color3.fromRGB(139,0,0) -- أحمر غامق
+    elseif playerName == "steve" then
+        color = Color3.fromRGB(0,0,255) -- أزرق
+    end
+    msg.TextColor3 = color
 
-	-- إضافة Padding لليمين لتظهر مبتعدة عن الحافة قليلاً
-	local pad = Instance.new("UIPadding", msg)
-	pad.PaddingLeft = UDim.new(0,6)
-	pad.PaddingRight = UDim.new(0,6)
-	pad.PaddingTop = UDim.new(0,2)
+    msg.Text = string.format("%s:  %s", playerName, bioText)
+    msg.Parent = scroll
+
+    local pad = Instance.new("UIPadding", msg)
+    pad.PaddingLeft = UDim.new(0,6)
+    pad.PaddingRight = UDim.new(0,6)
+    pad.PaddingTop = UDim.new(0,2)
 end
 
 -- تنفيذ Toggle
