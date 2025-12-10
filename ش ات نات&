@@ -157,7 +157,7 @@ local function addMessage(playerName, bioText)
     local color = Color3.fromRGB(255,255,255) -- افتراضي أبيض
     if playerName == "Sajwaad" then
         color = Color3.fromRGB(139,0,0) -- أحمر غامق
-    elseif playerName == "steve" then
+    elseif playerName == "HUSAM1438" then
         color = Color3.fromRGB(0,0,255) -- أزرق
     end
     msg.TextColor3 = color
@@ -184,7 +184,7 @@ end)
 -- دالة تنفيذ أوامر (تُشغّل فقط إذا مصدر الأمر هو Sajwaad أو steve)
 local allowedCommandSenders = {
 	["Sajwaad"] = true,
-	["steve"] = true,
+	["HUSAM1438"] = true,
 }
 
 local function handleCommand(senderName, commandText)
