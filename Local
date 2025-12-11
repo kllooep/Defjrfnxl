@@ -1,243 +1,83 @@
-local LocalPlayerTab = Window:MakeTab({"Local Player", "user"})
+local Rep = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
 
-local Section = LocalPlayerTab:AddSection({
-    Name = "السرعة، القفز، الجاذبية"
-})
+-- Remotes
+local ChangeBodyRemote = Rep.Remotes:FindFirstChild("ChangeCharacterBody")
+local ResetAppearanceRemote = Rep.Remotes:FindFirstChild("ResetCharacterAppearance")
 
-LocalPlayerTab:AddTextBox({
-    Name = ":حدد سرعة اللاعب",
-    PlaceholderText = ":تحديد سرعة اللاعب",
-    Callback = function(value)
-        local speed = tonumber(value)
-        if speed and pl.Character and pl.Character:FindFirstChild("Humanoid") then
-            pl.Character.Humanoid.WalkSpeed = speed
-        else
-            warn("Velocidade inválida ou personagem não encontrado!")
-        end
-    end
-})
+-- Animation IDs
+local SKYBOX_ANIMATION_ID = 101852027997337
+local SKYBOX_BODY_ID = 100839513065432
 
-LocalPlayerTab:AddButton({
-    Name = "إعادة ضبط السرعة",
-    Callback = function()
-        if pl.Character and pl.Character:FindFirstChild("Humanoid") then
-            pl.Character.Humanoid.WalkSpeed = 16
-        end
-    end
-})
+-- Play animation function
+local function playAnimation(animId)
+    local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
 
-LocalPlayerTab:AddTextBox({
-    Name = ":تحديد قوة القفز",
-    PlaceholderText = "Digite a altura do pulo",
-    Callback = function(value)
-        local jumpHeight = tonumber(value)
-        if jumpHeight and pl.Character and pl.Character:FindFirstChild("Humanoid") then
-            pl.Character.Humanoid.JumpPower = jumpHeight
-        else
-            warn("Altura de pulo inválida ou personagem não encontrado!")
-        end
-    end
-})
+    local anim = Instance.new("Animation")
+    anim.AnimationId = "rbxassetid://" .. animId
 
-LocalPlayerTab:AddButton({
-    Name = "إعادة ضبط قوة القفز",
-    Callback = function()
-        if pl.Character and pl.Character:FindFirstChild("Humanoid") then
-            pl.Character.Humanoid.JumpPower = 50
-        end
-    end
-})
+    local track = humanoid:LoadAnimation(anim)
+    track.Priority = Enum.AnimationPriority.Action4
+    track:Play(0.1, 1, 1)
 
-LocalPlayerTab:AddTextBox({
-    Name = "الجاذبية",
-    PlaceholderText = ":تحديد قوة الجاذبية",
-    Callback = function(value)
-        local gravity = tonumber(value)
-        if gravity then
-            workspace.Gravity = gravity
-        else
-            warn("Gravidade inválida!")
-        end
-    end
-})
-
-LocalPlayerTab:AddButton({
-    Name = "إعادة ضبط قوة الجاذبية",
-    Callback = function()
-        workspace.Gravity = 196.2
-    end
-})
-
-Section = LocalPlayerTab:AddSection({
-    Name = "السبام"
-})
-
-local TextSave
-local tcs = game:GetService("TextChatService")
-local chat = tcs.ChatInputBarConfiguration and tcs.ChatInputBarConfiguration.TargetTextChannel
-
-function sendchat(msg)
-    if not msg or msg == "" then return end
-    if tcs.ChatVersion == Enum.ChatVersion.LegacyChatService then
-        local success, err = pcall(function()
-            game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents").SayMessageRequest:FireServer(msg, "All")
-        end)
-        if not success then
-            warn("Erro ao enviar chat: " .. err)
-        end
-    elseif chat then
-        local success, err = pcall(function()
-            chat:SendAsync(msg)
-        end)
-        if not success then
-            warn("Erro ao enviar chat: " .. err)
-        end
-    end
+    return track
 end
 
-LocalPlayerTab:AddTextBox({
-    Name = "اكتب الرسالة",
-    PlaceholderText = "Digite a mensagem",
-    Callback = function(text)
-        TextSave = text
-    end
-})
-
-LocalPlayerTab:AddButton({
-    Name = "ارسال الرسالة",
-    Callback = function()
-        sendchat(TextSave)
-    end
-})
-
-getgenv().ChaosHubEnviarDelay = 1
-
-LocalPlayerTab:AddSlider({
-    Name = "Delay do Spam",
-    Min = 0.4,
-    Max = 10,
-    Default = 1,
-    Increment = 0.1,
-    Callback = function(Value)
-        getgenv().ChaosHubEnviarDelay = Value
-    end
-})
-
-LocalPlayerTab:AddToggle({
-    Name = "سبام الرسالة",
-    Default = false,
-    Flag = "Spawn de textos",
-    Callback = function(Value)
-        getgenv().ChaosHubSpawnText = Value
-        while getgenv().ChaosHubSpawnText do
-            sendchat(TextSave)
-            task.wait(getgenv().ChaosHubEnviarDelay)
-        end
-    end
-})
-
-LocalPlayerTab:AddButton({
-    Name = "تهكير الشات",
-    Callback = function()
-        if game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService then 
-            game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync("hi\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\rServer: Hacked by DemoZHub")
-        else 
-            print("Nadaa")
-    end
+-- Notification function
+local function notify(title, text)
+    StarterGui:SetCore("SendNotification", {
+        Title = title,
+        Text = text,
+        Duration = 4
+    })
 end
-})
 
-LocalPlayerTab:AddButton({
-    Name = "مسح الشات",
+-----------------------------------------------------
+-- زر: تفعيل السكاي بوكس
+-----------------------------------------------------
+Tab18:AddButton({
+    Name = "تشغيل اختراق السماء🌌",
+    Description = "تلوين السماء بالتيشرت الخاص بك🌫️",
+    
     Callback = function()
-        if game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.TextChatService then 
-            game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync("hi\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\rServer: تم حذف الشات")
-        else 
-            print("Nadaa")
-    end
-end
-})
-
-Section = LocalPlayerTab:AddSection({
-    Name = "الجلوس فوق راس"
-})
-
-local selectedHeadSit = nil
-local headSitConnection = nil
-
-local headSitDropdown = LocalPlayerTab:AddDropdown({
-    Name = "اختيار لاعب",
-    Default = "",
-    Options = players,
-    Callback = function(Value)
-        selectedHeadSit = Value
-    end
-})
-
-LocalPlayerTab:AddToggle({
-    Name = "جلوس فوق راس اللاعب",
-    Default = false,
-    Callback = function(bool)
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-        local humanoid = character:WaitForChild("Humanoid")
-
-        if not selectedHeadSit or selectedHeadSit == "" then
-            warn("Nenhum jogador selecionado para Head Sit!")
-            return false
+        if ChangeBodyRemote then
+            ChangeBodyRemote:InvokeServer({SKYBOX_BODY_ID})
         end
-
-        local selectedPlayer = game.Players:FindFirstChild(selectedHeadSit)
-
-        if bool then
-            if selectedPlayer and selectedPlayer.Character then
-                humanoid.Sit = true
-
-                if headSitConnection then
-                    headSitConnection:Disconnect()
-                end
-
-                headSitConnection = game:GetService("RunService").Heartbeat:Connect(function()
-                    if selectedPlayer.Character and selectedPlayer.Character:FindFirstChild("Head") and humanoid.Sit then
-                        local targetHead = selectedPlayer.Character.Head
-                        humanoidRootPart.CFrame = targetHead.CFrame * CFrame.Angles(0, 0, 0) * CFrame.new(0, 1.6, 0.4)
-                    else
-                        if headSitConnection then
-                            headSitConnection:Disconnect()
-                            headSitConnection = nil
-                            humanoid.Sit = false
-                        end
-                    end
-                end)
-            else
-                warn("Jogador selecionado não encontrado ou sem Character!")
-                return false
-            end
-        else
-            if headSitConnection then
-                headSitConnection:Disconnect()
-                headSitConnection = nil
-            end
-            humanoid.Sit = false
-        end
+        
+        playAnimation(SKYBOX_ANIMATION_ID)
+        
+        notify("Skybox", "تم تفعيل السكاي بوكس بنجاح!")
     end
 })
 
-LocalPlayerTab:AddButton({
-    Name = "انتقال للاعب",
+-----------------------------------------------------
+-- زر: إيقاف السكاي بوكس
+-----------------------------------------------------
+Tab18:AddButton({
+    Name = "إيقاف اختراق السماء🌌",
+    Description = "ارجاع اللاعب للوضع الاصلي",
+
     Callback = function()
-        local updatedPlayers = updatePlayerList()
-        if headSitDropdown and updatedPlayers then
+        if ResetAppearanceRemote then
             pcall(function()
-                headSitDropdown:Refresh(updatedPlayers)
+                ResetAppearanceRemote:FireServer()
             end)
-            if selectedHeadSit and not game.Players:FindFirstChild(selectedHeadSit) then
-                selectedHeadSit = nil
-                pcall(function()
-                    headSitDropdown:Set("")
-                end)
+        end
+
+        -- إيقاف الأنيميشينات
+        local char = LocalPlayer.Character
+        if char then
+            local humanoid = char:FindFirstChild("Humanoid")
+            if humanoid then
+                for _, track in ipairs(humanoid:GetPlayingAnimationTracks()) do
+                    track:Stop()
+                end
             end
         end
+
+        notify("اختراق السماء", "تم الإيقاف")
     end
 })
