@@ -298,7 +298,7 @@ inputCorner.CornerRadius = UDim.new(0,12)
 
 -- TextBox للكتابة
 local textBox = Instance.new("TextBox")
-textBox.Size = UDim2.new(1, -45, 1, -6)
+textBox.Size = UDim2.new(1, -80, 1, -6) -- قللت المساحة ليبقى مكان للـ Toggle
 textBox.Position = UDim2.new(0, 6, 0, 3)
 textBox.BackgroundTransparency = 1
 textBox.TextColor3 = Color3.fromRGB(255,255,255)
@@ -322,21 +322,59 @@ sendBtn.Parent = inputBar
 local sendCorner = Instance.new("UICorner", sendBtn)
 sendCorner.CornerRadius = UDim.new(1,0)
 
--- عند الضغط على زر الإرسال ينفذ الحدث المطلوب
+-- زر Toggle الإرسال التلقائي (⚡) على يمين شريط الإدخال
+local autoSendToggle = Instance.new("TextButton")
+autoSendToggle.Size = UDim2.new(0, 30, 0, 30)
+autoSendToggle.Position = UDim2.new(1, -70, 0.5, -15) -- بجانب زر الإرسال
+autoSendToggle.BackgroundColor3 = Color3.fromRGB(50,205,50) -- أخضر عند التشغيل
+autoSendToggle.Text = "⚡"
+autoSendToggle.TextColor3 = Color3.fromRGB(255,255,255)
+autoSendToggle.Font = Enum.Font.GothamBold
+autoSendToggle.TextSize = 18
+autoSendToggle.Parent = inputBar
+
+local toggleCorner = Instance.new("UICorner", autoSendToggle)
+toggleCorner.CornerRadius = UDim.new(1,0)
+
+-- حالة الميزة
+local autoSendEnabled = true -- مفعلة من البداية
+
+-- تغيير حالة Toggle عند الضغط
+autoSendToggle.MouseButton1Click:Connect(function()
+    autoSendEnabled = not autoSendEnabled
+    if autoSendEnabled then
+        autoSendToggle.BackgroundColor3 = Color3.fromRGB(50,205,50) -- أخضر عند التشغيل
+    else
+        autoSendToggle.BackgroundColor3 = Color3.fromRGB(80,80,80) -- رمادي عند الإيقاف
+    end
+end)
+
+-- دالة إرسال النص
+local function sendText(txt)
+    if txt ~= nil and txt ~= "" then
+        local args = {
+            "RolePlayBio",
+            txt
+        }
+
+        local RE = game:GetService("ReplicatedStorage"):WaitForChild("RE")
+        local remote = RE:WaitForChild("1RPNam1eTex1t")
+
+        remote:FireServer(unpack(args))
+
+        -- تفريغ الشريط بعد الإرسال
+        textBox.Text = ""
+    end
+end
+
+-- تنفيذ الإرسال عند الضغط على زر Send
 sendBtn.MouseButton1Click:Connect(function()
-	local txt = textBox.Text
-	if txt ~= nil and txt ~= "" then
-		local args = {
-			"RolePlayBio",
-			txt
-		}
+    sendText(textBox.Text)
+end)
 
-		local RE = game:GetService("ReplicatedStorage"):WaitForChild("RE")
-		local remote = RE:WaitForChild("1RPNam1eTex1t")
-
-		remote:FireServer(unpack(args))
-
-		-- لتفريغ الشريط بعد الإرسال
-		textBox.Text = ""
-	end
+-- تنفيذ الإرسال التلقائي عند الانتهاء من الكتابة إذا كانت الميزة مفعلة
+textBox.FocusLost:Connect(function(enterPressed)
+    if autoSendEnabled and enterPressed then
+        sendText(textBox.Text)
+    end
 end)
