@@ -169,6 +169,8 @@ local function addMessage(playerName, bioText)
     pad.PaddingLeft = UDim.new(0,6)
     pad.PaddingRight = UDim.new(0,6)
     pad.PaddingTop = UDim.new(0,2)
+
+scroll.CanvasPosition = Vector2.new(0, scroll.AbsoluteCanvasSize.Y)
 end
 
 -- تنفيذ Toggle
