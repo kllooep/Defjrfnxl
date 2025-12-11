@@ -42,7 +42,7 @@ gui.Parent = PlayerGui
 -- الإطار الرئيسي (Panel)
 local main = Instance.new("Frame")
 main.Name = "RPBioPanel"
-main.Size = UDim2.new(0, 380, 0, 210)
+main.Size = UDim2.new(0, 380, 0, 170)
 main.Position = UDim2.new(0, 50, 0.08, 0)
 main.BackgroundColor3 = Color3.new(0,0,0)
 main.BackgroundTransparency = 0.82
