@@ -1,5 +1,3 @@
-local StarterGui = game:GetService("StarterGui")
-StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false)
 -- الحصول على PlayerGui
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -67,6 +65,7 @@ toggle.Image = "rbxassetid://76365897790598" -- صورتك
 toggle.ScaleType = Enum.ScaleType.Fit
 toggle.AutoButtonColor = true
 toggle.Parent = gui
+toggle.ZIndex = 9999
 
 -- جعل الزر دائري
 local toggleCorner = Instance.new("UICorner", toggle)
