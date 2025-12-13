@@ -43,19 +43,28 @@ local redzlib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/
                     if (gui:IsA("ScreenGui") and gui.Name:lower():find("redz")) then gui:Destroy();
                 end
             end
-            local OrionLib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/GUI/refs/heads/main/F2%202.txt"))();local Window=OrionLib:MakeWindow(
-            {
-                Name="<font color='rgb(255, 1, 1)'>F2 Rp || Brookhaven</font>",HidePremium=false,SaveConfig=true,ConfigFolder="OrionTest"
-            }
-            );local Tab=Window:MakeTab(
-            {
-                Name="الـحقـوق",Icon="rbxassetid://10723415903",PremiumOnly=false
-            }
-            );local Paragraph=Tab:AddParagraph("رجـعت بنـسخه سكـربت أقـوه مـن كـل سكـربتاتي السـابقه !","أفـضل سـكربت عـراقي ؟");local Section=Tab:AddSection(
+            local Libary = loadstring(game:HttpGet("https://raw.githubusercontent.com/kllooep/Fjjzxda6/refs/heads/main/DovEn529"))()
+
+local Window = Libary:MakeWindow({
+    Title = "👹NetroZHub- فريق",
+    SubTitle = "by: مطورين Developers (Ghali, , EV_Rami)",
+    LoadText = "NetroZHubDevelopers",
+    Flags = "NetroZ_Brookhaven"
+})
+Window:AddMinimizeButton({
+    Button = { Image = "rbxassetid://132069262307646", BackgroundTransparency = 0 },
+    Corner = { CornerRadius = UDim.new(35, 1) },
+})
+
+local Tab=Window:MakeTab({
+                 Title ="الـحقـوق",Icon="rbxassetid://10723415903",
+            })
+
+    local Paragraph=Tab:AddParagraph("رجـعت بنـسخه سكـربت أقـوه مـن كـل سكـربتاتي السـابقه !","أفـضل سـكربت عـراقي ؟");local Section=Tab:AddSection(
             {
                 Name="<font color='rgb(255, 2, 2)'>الـحقوق</font>"
-            }
-            );Tab:AddButton(
+            })
+Tab:AddButton(
             {
                 Name="أنسـخ حسـابي تيك تـوك",Description="",Callback=function() setclipboard("._ol02");local Sound=Instance.new("Sound",game:GetService("SoundService"));Sound.SoundId="rbxassetid://8183296024";Sound:Play();game.StarterGui:SetCore("SendNotification",
                 {
@@ -63,8 +72,8 @@ local redzlib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/
                 }
                 );
             end
-        }
-        );Tab:AddButton(
+        })
+Tab:AddButton(
         {
             Name="أنسـخ حسـابي روبلوكـس",Description="",Callback=function() setclipboard("SLS25KRAR");local Sound=Instance.new("Sound",game:GetService("SoundService"));Sound.SoundId="rbxassetid://8183296024";Sound:Play();game.StarterGui:SetCore("SendNotification",
             {
@@ -72,12 +81,13 @@ local redzlib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/
             }
             );
         end
-    }
-    );local Tab=Window:MakeTab(
+})
+
+local Tab1=Window:MakeTab(
     {
-        Name="أخـرى",Icon="rbxassetid://10734949856",PremiumOnly=false
+        Name="أخـرى",Icon="rbxassetid://10734949856",
     }
-    );local Section=Tab:AddSection(
+    );local Section=Tab1:AddSection(
     {
         Name="<font color='rgb(255, 0, 0)'>السيـرفر</font>"
     }
