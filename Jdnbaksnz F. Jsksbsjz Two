@@ -1,13 +1,4 @@
-do
-    local Players=game:GetService("Players");local player=Players.LocalPlayer;local gui=Instance.new("ScreenGui",player:WaitForChild("PlayerGui"));gui.Name="IntroMessage";local frame=Instance.new("Frame",gui);frame.Size=UDim2.new(0.5,0,0.2,0);frame.Position=UDim2.new(0.25,0,0.4,0);frame.BackgroundColor3=Color3.fromRGB(20,20,20);frame.BorderSizePixel=0;frame.BackgroundTransparency=0.2;local label=Instance.new("TextLabel",frame);label.Size=UDim2.new(1,0,1,0);label.BackgroundTransparency=1;label.TextColor3=Color3.new(1,1,1);label.Font=Enum.Font.GothamBold;label.TextScaled=true;label.Text="";local sound=Instance.new("Sound",frame);sound.SoundId="rbxassetid://18998603679";sound.Volume=1;sound.Name="KeyboardSound";sound.Looped=false;local message="أَهلاً بِكَ في سكربت المطور محمد";local typingSpeed=0.05;coroutine.wrap(function() for i=1, #message
-    do
-        label.Text=string.sub(message,1,i);sound:Play();task.wait(typingSpeed);
-    end
-    wait(2);for i=1,10
-    do
-        frame.Rotation=math.random( -15,15);frame.Position=frame.Position + UDim2.new(0,math.random( -10,10),0,math.random( -10,10)) ;frame.BackgroundTransparency+=0.08 label.TextTransparency+=0.1 task.wait(0.03);
-    end
-    gui:Destroy();local Sound=Instance.new("Sound",game:GetService("SoundService"));Sound.SoundId="rbxassetid://6073491164";Sound:Play();local redzlib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/GUI/refs/heads/main/F2.txt"))();local Window=redzlib:MakeWindow(
+local redzlib=loadstring(game:HttpGet("https://raw.githubusercontent.com/MS7top/GUI/refs/heads/main/F2.txt"))();local Window=redzlib:MakeWindow(
     {
         "F2 Rp || Brookhaven","v0.1","testando-redzLibv5.json"
     }
