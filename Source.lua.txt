@@ -7,8 +7,6 @@ local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local Player = Players.LocalPlayer
 
-local LibraryRawUrl = "https://raw.githubusercontent.com/hacked-prototype/RedzLibV4/main"
-
 local redzLib = {
   info = {
     Version = "v1.2.2",
@@ -60,7 +58,7 @@ local redzLib = {
     ScrollSize = 160,
     TransparencyHub = 0.1
   },
-  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/IIHUII/Fjjzxda6/refs/heads/main/Icons.lua"))(),
+  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/kllooep/Defjrfnxl/refs/heads/main/icons"))(),
   SaveForTheme = {
     Stroke = {},
     Buttons = {},
